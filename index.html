@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>InfoSaúde Recife</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
@@ -22,48 +22,41 @@
     </nav>
   </header>
 
-  <section id="home" class="hero">
-    <h1>Bem-vindo à InfoSaúde Recife</h1>
-    <p>Facilitando o acesso à saúde pública com tecnologia e empatia.</p>
-  </section>
-
-  <section id="servicos">
-    <h2>Serviços</h2>
-    <p><!-- Descrição dos serviços aqui --></p>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Encontre atendimento de saúde pública em Recife</h1>
+      <p>Pesquise por endereço, bairro ou especialidade e encontre o posto mais próximo.</p>
+    </div>
   </section>
 
   <section id="postos">
-    <h2>Mapa Interativo dos Postos</h2>
-    <input type="text" id="endereco" placeholder="Digite seu endereço ou CEP">
-    <button onclick="buscarEndereco()">Buscar</button>
+    <h2>Postos de Saúde</h2>
+    <div class="filtros">
+      <input type="text" id="endereco" placeholder="Digite seu endereço ou CEP" />
+      <select id="filtro-especialidade">
+        <option value="">Todas as Especialidades</option>
+      </select>
+      <button onclick="buscarEndereco()">Buscar</button>
+    </div>
     <div id="mapa"></div>
   </section>
 
-  <section id="especialidades">
-    <h2>Especialidades</h2>
-    <p><!-- Lista de especialidades aqui --></p>
-  </section>
-
-  <section id="dicas">
-    <h2>Dicas de Saúde</h2>
-    <p><!-- Conteúdo de dicas aqui --></p>
-  </section>
-
+  <section id="servicos"><h2>Serviços</h2><p><!-- Conteúdo --></p></section>
+  <section id="especialidades"><h2>Especialidades</h2><ul><!-- Conteúdo --></ul></section>
+  <section id="dicas"><h2>Dicas de Saúde</h2><p><!-- Conteúdo --></p></section>
   <section id="contato">
     <h2>Fale Conosco</h2>
     <form>
-      <input type="text" placeholder="Nome" required>
-      <input type="email" placeholder="Email" required>
+      <input type="text" placeholder="Nome" required />
+      <input type="email" placeholder="Email" required />
       <textarea placeholder="Mensagem" required></textarea>
       <button type="submit">Enviar</button>
     </form>
   </section>
 
-  <footer>
-    <p>© 2025 InfoSaúde Recife</p>
-  </footer>
+  <footer><p>© 2025 InfoSaúde Recife</p></footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
