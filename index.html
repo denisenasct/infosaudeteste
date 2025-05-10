@@ -1,9 +1,17 @@
-<!DOCTYPE html>
+import os
+
+base_dir = "/mnt/data/infosaude_completo"
+os.makedirs(f"{base_dir}/assets/css", exist_ok=True)
+os.makedirs(f"{base_dir}/assets/js", exist_ok=True)
+os.makedirs(f"{base_dir}/assets/img", exist_ok=True)
+
+# HTML com mapa interativo, filtros e layout profissional
+html = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>InfoSaúde Recife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
@@ -25,7 +33,7 @@
   <section class="hero" id="home">
     <div class="hero-content">
       <h1>Encontre atendimento de saúde pública em Recife</h1>
-      <p>Pesquise por endereço, bairro ou especialidade e encontre o posto mais próximo.</p>
+      <p>Pesquise por endereço, bairro ou especialidade e veja os postos mais próximos.</p>
     </div>
   </section>
 
@@ -41,9 +49,9 @@
     <div id="mapa"></div>
   </section>
 
-  <section id="servicos"><h2>Serviços</h2><p><!-- Conteúdo --></p></section>
-  <section id="especialidades"><h2>Especialidades</h2><ul><!-- Conteúdo --></ul></section>
-  <section id="dicas"><h2>Dicas de Saúde</h2><p><!-- Conteúdo --></p></section>
+  <section id="servicos"><h2>Serviços</h2><p><!-- Conteúdo dos serviços --></p></section>
+  <section id="especialidades"><h2>Especialidades</h2><ul id="lista-especialidades"></ul></section>
+  <section id="dicas"><h2>Dicas de Saúde</h2><p><!-- Conteúdo de dicas --></p></section>
   <section id="contato">
     <h2>Fale Conosco</h2>
     <form>
@@ -57,6 +65,12 @@
   <footer><p>© 2025 InfoSaúde Recife</p></footer>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
+
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
