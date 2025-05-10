@@ -1,73 +1,3022 @@
-import os
+<!DOCTYPE html>
+<html lang="pt-pt" dir="ltr" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="Bem-vindo à InfoSaúde, um grupo de referência no setor de informações sobre saúde em Recife. Com informações sobre as unidades do serviço público da cidade do Recife, garantimos que você seja atendido no lugar e na hora certa" />
+<meta name="keywords" content="Lusíadas Saúde" />
+<link rel="shortlink" href="https://www.lusiadas.pt/" />
+<link rel="canonical" href="https://www.lusiadas.pt/" />
+<meta name="google-site-verification" content="google56ec9f8abee2f0df" />
+<link rel="apple-touch-icon" sizes="180x180" href="/sites/default/files/favicons/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/sites/default/files/favicons/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/sites/default/files/favicons/favicon-16x16.png"/>
+<link rel="manifest" href="/sites/default/files/favicons/site.webmanifest"/>
+<meta name="msapplication-TileColor" content="#da532c"/>
+<meta name="theme-color" content="#ffffff"/>
+<meta name="favicon-generator" content="responsive_favicons + realfavicongenerator.net" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="alternate" hreflang="pt-pt" href="https://www.lusiadas.pt/" />
+<link rel="alternate" hreflang="en" href="https://www.lusiadas.pt/en" />
+<script>window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};</script>
 
-base_dir = "/mnt/data/infosaude_completo"
-os.makedirs(f"{base_dir}/css", exist_ok=True)
-os.makedirs(f"{base_dir}/js", exist_ok=True)
-os.makedirs(f"{base_dir}/img", exist_ok=True)
+    <title>InfoSaúde</title>
+    <link rel="stylesheet" media="all" href="/sites/default/files/css/css_p41xQT7-O-zn0bMHoNaH3ABDTHD2bhH9nQCh7xLYRmE.css?delta=0&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxFi1EKAyEMBS9k9UzPTdYVskZM0uLtC6WlP8MwMCByxdgFX8nn0uHp0MWFVkxIRrgeek9h5yRhHQQzBHFpohXyMN_SR0sTC21hXvZ7_yXHmFGl28WUbJvzXSqM07Pzy8qH-VYK4Tcs1zqg" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_HcJe0NoNpPrfRgG98HmuThoVp-rwoIpdsxALx-OoPNo.css?delta=1&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxFi1EKAyEMBS9k9UzPTdYVskZM0uLtC6WlP8MwMCByxdgFX8nn0uHp0MWFVkxIRrgeek9h5yRhHQQzBHFpohXyMN_SR0sTC21hXvZ7_yXHmFGl28WUbJvzXSqM07Pzy8qH-VYK4Tcs1zqg" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_LbunO4OduSdRjoWgugjjzoKS6OAiQUC-glrU4aK2j1A.css?delta=2&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxFi1EKAyEMBS9k9UzPTdYVskZM0uLtC6WlP8MwMCByxdgFX8nn0uHp0MWFVkxIRrgeek9h5yRhHQQzBHFpohXyMN_SR0sTC21hXvZ7_yXHmFGl28WUbJvzXSqM07Pzy8qH-VYK4Tcs1zqg" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_4dBYUkhX2RE9zNNT74cZ0mukE4U-_KCDtIsOVZXPBNM.css?delta=3&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxFi1EKAyEMBS9k9UzPTdYVskZM0uLtC6WlP8MwMCByxdgFX8nn0uHp0MWFVkxIRrgeek9h5yRhHQQzBHFpohXyMN_SR0sTC21hXvZ7_yXHmFGl28WUbJvzXSqM07Pzy8qH-VYK4Tcs1zqg" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/css_3SQhlNk4vOVaHgCokihE5n_WiRx7MDYkbQif-mt2EbM.css?delta=4&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxFi1EKAyEMBS9k9UzPTdYVskZM0uLtC6WlP8MwMCByxdgFX8nn0uHp0MWFVkxIRrgeek9h5yRhHQQzBHFpohXyMN_SR0sTC21hXvZ7_yXHmFGl28WUbJvzXSqM07Pzy8qH-VYK4Tcs1zqg" />
 
-# HTML com mapa interativo, filtros e layout profissional
-html = """<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>InfoSaúde Recife</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-</head>
-<body>
-  <header>
-    <div class="logo">InfoSaúde Recife</div>
-    <nav>
-      <ul>
-        <li><a href="#home">Início</a></li>
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#postos">Postos</a></li>
-        <li><a href="#especialidades">Especialidades</a></li>
-        <li><a href="#dicas">Dicas</a></li>
-        <li><a href="#contato">Contato</a></li>
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/2016","currentPathIsAdmin":false,"isFront":true,"currentLanguage":"pt-pt"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"eJxdjlEOwjAMQy9U2iNNXhu6omypmhTY7YFpY4Ify372h5GSCZY1YDf-2mQxF6VRSK1XsEc3iTJXJiOXRTLTYMghv-U_e9zw_IWz464FCaroiUJmGcEXtZXLkrcyfdpBCS1O4Vjv2VU05IY66XHoJL4vtY9cdKLk1GBFrcTv8CROVzWawwgldy_00LCpnyV1phftJmcV","theme":"lusiadassaude","theme_token":null},"ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true},"gtag":{"tagId":"","consentMode":false,"otherIds":[],"events":[],"additionalConfigInfo":[]},"gtm":{"tagId":null,"settings":{"data_layer":"dataLayer","include_classes":false,"allowlist_classes":"google\nnonGooglePixels\nnonGoogleScripts\nnonGoogleIframes","blocklist_classes":"customScripts\ncustomPixels","include_environment":false,"environment_id":"","environment_token":""},"tagIds":["GTM-KFQ5T34"]},"selected_organization":"Hospital Lus\u00edadas Lisboa","selected_organization_default":true,"statistics":{"data":{"nid":"2016"},"url":"\/core\/modules\/statistics\/statistics.php"},"field_group":{"html_element":{"mode":"heydoc","context":"view","settings":{"classes":"column is-2","show_empty_fields":false,"id":"","element":"div","show_label":false,"label_element":"h3","label_element_classes":"","attributes":"","effect":"none","speed":"fast"}}},"language":"pt-pt","user":{"uid":0,"permissionsHash":"c8513caad8fe50b7f2ff2ef671a2048111746245d2c02647aab115b0c8e37dcc"}}</script>
+<script src="/sites/default/files/js/js_MVO4FP0rmspn_rhSdA1_gXEQijoUoLXEBGWc4_cnCQM.js?scope=header&amp;delta=0&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxdjl0OwjAMgy9U1iNNpgmhKGumJpXY7fnRpgleLPuzHwyiMLQtYzfTrVuLVKxzpj5W6IQRVmxZlYOTmInyHJAsb_nPEx54_sIl6fAKgjsGcRa1K_TisWlt8i3p087O6OWej_WekweietTix6GTvADjn0rb"></script>
+<script src="/modules/contrib/google_tag/js/gtag.js?sw0pa1"></script>
+<script src="/modules/contrib/google_tag/js/gtm.js?sw0pa1"></script>
+
+    <style>
+      @font-face {
+    font-family: 'Maven Pro';
+    src: url('/themes/custom/lusiadassaude/fonts/MavenPro-Regular.woff2') format('woff2'),
+        url('/themes/custom/lusiadassaude/fonts/MavenPro-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Maven Pro';
+    src: url('/themes/custom/lusiadassaude/fonts/MavenPro-Medium.woff2') format('woff2'),
+        url('/themes/custom/lusiadassaude/fonts/MavenPro-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Maven Pro';
+    src: url('/themes/custom/lusiadassaude/fonts/MavenPro-Bold.woff2') format('woff2'),
+        url('/themes/custom/lusiadassaude/fonts/MavenPro-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        src: local('OpenSans-Regular'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 800;
+        src: local('OpenSans-ExtraBold'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-ExtraBold.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 700;
+        src: local('OpenSans-Bold'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        src: local('OpenSans-SemiBold'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-SemiBold.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 500;
+        src: local('OpenSans-Medium'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-Medium.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 300;
+        src: local('OpenSans-Light'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-Light.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: italic;
+        font-weight: 400;
+        src: local('OpenSans-Italic'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-Italic.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: italic;
+        font-weight: 800;
+        src: local('OpenSans-ExtraBoldItalic'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: italic;
+        font-weight: 700;
+        src: local('OpenSans-BoldItalic'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-BoldItalic.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: italic;
+        font-weight: 600;
+        src: local('OpenSans-SemiBoldItalic'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-SemiBoldItalic.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: italic;
+        font-weight: 500;
+        src: local('OpenSans-MediumItalic'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-MediumItalic.ttf') format('truetype');
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        font-style: italic;
+        font-weight: 300;
+        src: local('OpenSans-LightItalic'), url('/themes/custom/lusiadassaude/fonts/OpenSans/OpenSans-LightItalic.ttf') format('truetype');
+      }
+
+    </style>
+            <!-- TrustArc CMP will send updates using Gtag -->
+                <!-- TrustArc CMP will send updates using Gtag -->
+<script async="async" type="text/javascript" crossorigin src="//consent.trustarc.com/notice?domain=uhg-lusiadas.com&amp;c=teconsent&amp;js=nj&amp;noticeType=bb&amp;gtm=1"></script>
+        </head>
+  <body>
+      <a href="#main-content" class="visually-hidden focusable">
+        Passar para o conteúdo principal
+      </a>
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KFQ5T34"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+        <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    <div id="app">
+
+    <div>
+                                              <header class="hero header header--round-bottom header--scroll-down" data-header-type="type-1">
+            <svg class="header-desktop-bottom-shape homepage-position-banner" preserveAspectRatio="none" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1400 500" enable-background="new 0 0 1400 500" xml:space="preserve">
+    <title>898BF944-EE29-49FA-84AF-9EA902CD6913</title>
+    <g id="Design_1_">
+      <g id="Homepage_1_" transform="translate(-941.000000, -408.000000)">
+        <path id="ic_shape_blue_02" fill="#002F7B" d="M2341,739.5c-101.9,0-254.9,0-459,0c158.8-167.2,311.7-277.5,459-331V739.5z"></path>
+      </g>
+    </g>
+    <g id="Design">
+      <g id="Homepage" transform="translate(0.000000, -658.000000)">
+        <path id="ic_shape_curve_top_white" fill="#F4FAFF" d="M0,1158c400.7-198,867.3-274,1400-228v228H0z"></path>
+      </g>
+    </g>
+  </svg>
+  <svg class="header-desktop-bottom-short-shape" preserveAspectRatio="none" viewBox="0 0 1400 333" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 21</title>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Home-Unidade" transform="translate(0.000000, -408.000000)">
+        <g id="Group-21" transform="translate(0.000000, 408.051797)">
+          <path d="M1400,330.948203 C1297.96427,330.948203 1144.96427,330.948203 941,330.948203 C1099.70252,163.807117 1252.7334,53.4910491 1400,3.06954462e-12 L1400,330.948203 Z" id="Rectangle-Copy-7" fill="#002F7B"></path>
+          <path d="M0,323.948203 C349.333333,233.281536 816,212.61487 1400,261.948203 L1400,331.948203 L0,331.948203 L0,323.948203 Z" id="ic_shape_curve_top_white_unidade" fill="#F4FAFF"></path>
+        </g>
+      </g>
+    </g>
+  </svg>
+  <svg class="header-mobile-bottom-shape" viewBox="0 0 320 105" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_cut_header</title>
+    <g id="New-UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="ic_cut_header" fill-rule="nonzero">
+        <path d="M320,99.4508924 C231.758335,101.275744 188.242308,101.563491 189.451916,100.314132 C234.419107,53.8692247 277.622401,20.4769451 320,0.137293 L320,99.4508924 Z" id="Rectangle-Copy-7" fill="#002F7B"></path>
+        <path d="M0,104 C78.2834157,88.1250473 184.950082,74.1250473 320,62.0000002 L320,105 L0,105 L0,104 Z" id="Rectangle" fill="#F4FAFF"></path>
+      </g>
+    </g>
+  </svg>
+  <aside class="mobile-search-overlay visually-hidden" id="mobile-search-overlay">
+  <h3 class="main-sub-title block-title">Pesquisa</h3>
+  <img id="mobile-search-close" src="/themes/custom/lusiadassaude/svg/ic_close_blue.svg" alt="close icon" />
+  <div class="mobile-search-block">
+    <div id="block-globalsearchblock" class="global-search-lusidadas">
+  
+    
+      <form class="global-search" data-drupal-selector="global-search" action="/" method="post" id="global-search" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-textfield form-item-search-keyword js-form-item-search-keyword form-no-label">
+        <div class="search-input-wrapper wrapper-medium">
+  <input autocomplete="off" minlength="3" data-drupal-selector="edit-search-keyword" type="text" id="edit-search-keyword" name="search-keyword" value="" size="60" maxlength="128" placeholder="O que procura?" class="form-text lusiadas-search-input-global-search" required data-invalid-msg="Insira pelo menos 3 caracteres." />
+</div>
+
+        </div>
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--3" name="op" value="Procurar" class="button js-form-submit form-submit" />
+<input autocomplete="off" data-drupal-selector="form-e2qdpqxq-hicqvmcjkeopbsccdhe9sttx6cwyjjj2gw" type="hidden" name="form_build_id" value="form-E2QdpQxQ_hicQvmCjkEoPbSccDhE9STTx6cWyJJj2Gw" />
+<input data-drupal-selector="edit-global-search" type="hidden" name="form_id" value="global-search" />
+
+</form>
+
+
+  </div>
+
+  </div>
+</aside>
+
+  <div class="hero-body">
+    <div class="container header-mobile">
+      <div class="header-mobile__left">
+        <div class="header-nav-logo-image">
+                      <div id="block-lusiadaslogo">
+  
+    
+            <div class="image-block center">
+                  <a href="/homepage-lusiadas" target="">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+              <img width="480" height="480" src="/sites/default/files/2022-05/lg_lusiadas_00%20%283%29.svg" alt="Logo institucional" loading="lazy" />
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+                  </a>
+              </div>
+      </div>
+
+                  </div>
+      </div>
+      <div class="header-mobile__right">
+        <nav role="navigation" aria-labelledby="block-lusiadassaude-main-menu-mobile-last-menu" id="block-lusiadassaude-main-menu-mobile-last">
+            
+  <p class="visually-hidden" id="block-lusiadassaude-main-menu-mobile-last-menu">Main navigation Mobile Last Button</p>
+  
+
+        
+                                                                                    <a class="btn btn-size-small btn-context-primary" href="https://portal.maislusiadas.pt/">
+                  <span class="custom-adjustment-display-mobile">Marcações</span>
+        </a>
+                
+
+  </nav>
+
+        <button class="hamburger-icon">
+          Mobile Menu Icon
+          <span class="hamburger-icon__bar hamburger-icon__bar--bar-1"></span>
+          <span class="hamburger-icon__bar hamburger-icon__bar--bar-2"></span>
+          <span class="hamburger-icon__bar hamburger-icon__bar--bar-3"></span>
+        </button>
+      </div>
+      <div class="mobile-nav">
+        <div class="mobile-nav__navigation_right">
+          <button class="btn-icon">
+            <img class="btn-icon__image" src="/themes/custom/lusiadassaude/svg/ic_search_white.svg" alt="Lusíadas Logo" typeof="foaf:Image">
+          </button>
+        </div>
+        <div class="mobile-nav__navigation">
+                    
+      
+                <ul class="mobile-nav__navigation-list">
+                                  <li class="mobile-nav__navigation-list-item">
+            <a href="/grupo-lusiadas-saude" class="btn btn--link-white" data-drupal-link-system-path="node/4934">Lusíadas</a>
+                      </li>
+                                      <li class="mobile-nav__navigation-list-item">
+            <a href="/hospitais-clinicas" class="btn btn--link-white" data-drupal-link-system-path="node/2131">Hospitais e Clínicas</a>
+                      </li>
+                                      <li class="mobile-nav__navigation-list-item">
+            <a href="/corpo-clinico" class="btn btn--link-white">Corpo Clínico</a>
+                      </li>
+                                      <li class="mobile-nav__navigation-list-item">
+            <a href="/especialidades" class="btn btn--link-white">Especialidades</a>
+                      </li>
+                                      <li class="mobile-nav__navigation-list-item">
+            <a href="/acordos" class="btn btn--link-white">Acordos</a>
+                      </li>
+                                          </ul>
+      
+
+
+
+  
+
+                    
+        </div>
+        <div class="mobile-nav__actions">
+          <nav role="navigation" aria-labelledby="block-headermeta-mobile-menu" id="block-headermeta-mobile">
+            
+  <p class="visually-hidden" id="block-headermeta-mobile-menu">Header Meta Mobile</p>
+  
+
+        
+
+            <ul region="headermeta_mobile" class="menu">
+            <li class="menu-icon menu-icon-23 menu-item mobile-nav__actions-list-item">
+                        <a href="/fale-connosco" class="menu-link" data-drupal-link-system-path="node/4933"><span>Fale Connosco</span></a>
+              </li>
+          <li class="menu-icon menu-icon-25 menu-item mobile-nav__actions-list-item">
+                        <a href="https://portal.maislusiadas.pt/" target="_blank" class="portal-lusiadas menu-link"><span>+ Lusíadas</span></a>
+              </li>
+          <li class="menu-icon menu-icon-1010 menu-item mobile-nav__actions-list-item">
+                        <a href="https://www.heydoc.pt/" target="_blank" class="menu-link"><span>HeyDoc</span></a>
+              </li>
+          <li class="menu-icon menu-icon-1093 menu-item mobile-nav__actions-list-item">
+                        <a href="/lusiadas-sport" class="menu-link" data-drupal-link-system-path="node/387259"><span>Lusíadas Sport</span></a>
+              </li>
+          <li class="menu-icon menu-icon-630 menu-item mobile-nav__actions-list-item">
+                        <a href="/lusiadas/lusiadas-knowledge-center" class="menu-link" data-drupal-link-system-path="node/14801"><span>Lusíadas Knowledge Center</span></a>
+              </li>
+          <li class="menu-icon menu-icon-1126 menu-item mobile-nav__actions-list-item">
+                        <a href="https://jobpage.cvwarehouse.com/?companyGuid=af1a9847-a9ab-4cd7-904e-d48470afea9a&amp;lang=pt-PT" target="_blank" class="menu-link"><span>Junte-se a nós</span></a>
+              </li>
       </ul>
-    </nav>
-  </header>
+  
+  
 
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>Encontre atendimento de saúde pública em Recife</h1>
-      <p>Pesquise por endereço, bairro ou especialidade e veja os postos mais próximos.</p>
+
+  </nav>
+
+                      <div class="language-switcher-language-url" id="block-languageswitcher-mobile" role="navigation">
+  
+    
+      <ul class="links"><li hreflang="pt-pt" data-drupal-link-system-path="&lt;front&gt;" class="is-active" aria-current="page"><a href="/" class="language-link is-active" hreflang="pt-pt" data-drupal-link-system-path="&lt;front&gt;" aria-current="page">PT</a></li><li hreflang="en" data-drupal-link-system-path="&lt;front&gt;"><a href="/en" class="language-link" hreflang="en" data-drupal-link-system-path="&lt;front&gt;">EN</a></li></ul>
+  </div>
+
+                  </div>
+        <div class="mobile-nav__footer">
+          
+        </div>
+      </div>
     </div>
-  </section>
+    <div class="container header-desktop">
+      <div class="header-top">
+        <div class="meta-header-left">
+          <div id="block-globalsearchblock" class="global-search-lusidadas">
+  
+    
+      <form class="global-search" data-drupal-selector="global-search" action="/" method="post" id="global-search" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-textfield form-item-search-keyword js-form-item-search-keyword form-no-label">
+        <div class="search-input-wrapper wrapper-medium">
+  <input autocomplete="off" minlength="3" data-drupal-selector="edit-search-keyword" type="text" id="edit-search-keyword" name="search-keyword" value="" size="60" maxlength="128" placeholder="O que procura?" class="form-text lusiadas-search-input-global-search" required data-invalid-msg="Insira pelo menos 3 caracteres." />
+</div>
 
-  <section id="postos">
-    <h2>Postos de Saúde</h2>
-    <div class="filtros">
-      <input type="text" id="endereco" placeholder="Digite seu endereço ou CEP" />
-      <select id="filtro-especialidade">
-        <option value="">Todas as Especialidades</option>
-      </select>
-      <button onclick="buscarEndereco()">Buscar</button>
+        </div>
+<input data-drupal-selector="edit-submit" type="submit" id="edit-submit--3" name="op" value="Procurar" class="button js-form-submit form-submit" />
+<input autocomplete="off" data-drupal-selector="form-e2qdpqxq-hicqvmcjkeopbsccdhe9sttx6cwyjjj2gw" type="hidden" name="form_build_id" value="form-E2QdpQxQ_hicQvmCjkEoPbSccDhE9STTx6cWyJJj2Gw" />
+<input data-drupal-selector="edit-global-search" type="hidden" name="form_id" value="global-search" />
+
+</form>
+
+
+  </div>
+
+        </div>
+        <div class="meta-header-right">
+          <nav role="navigation" aria-labelledby="block-headermeta-menu" id="block-headermeta">
+            
+  <p class="visually-hidden" id="block-headermeta-menu">Header Meta</p>
+  
+
+        
+
+          <ul region="headermeta" class="menu">
+                <li class="menu-icon menu-icon-1010 menu-item">
+                      <a href="https://www.heydoc.pt/" class="menu-link menu-link-icon"
+               target="_blank">
+              <img src="/sites/default/files/menu_icons/logo_heydoc.svg"/>
+            </a>
+                            </li>
+              <li class="menu-icon menu-icon-1093 menu-item">
+                      <a href="/lusiadas-sport" class="menu-link" data-drupal-link-system-path="node/387259">Lusíadas Sport</a>
+                            </li>
+              <li class="menu-icon menu-icon-630 menu-item">
+                      <a href="/lusiadas/lusiadas-knowledge-center" class="menu-link" data-drupal-link-system-path="node/14801">Lusíadas Knowledge Center</a>
+                            </li>
+              <li class="menu-icon menu-icon-1126 menu-item">
+                      <a href="https://jobpage.cvwarehouse.com/?companyGuid=af1a9847-a9ab-4cd7-904e-d48470afea9a&amp;lang=pt-PT" target="_blank" class="menu-link">Junte-se a nós</a>
+                            </li>
+              <li class="menu-icon menu-icon-23 menu-item">
+                      <a href="/fale-connosco" class="menu-link" data-drupal-link-system-path="node/4933">Fale Connosco</a>
+                            </li>
+              <li class="menu-icon menu-icon-25 menu-item portal-lusiadas">
+                      <a href="https://portal.maislusiadas.pt/" target="_blank" class="portal-lusiadas menu-link">+ Lusíadas</a>
+                            </li>
+          </ul>
+  
+
+
+
+  </nav>
+
+                        <div class="language-switcher-language-url" id="block-languageswitcher" role="navigation">
+  
+    
+      <ul class="links"><li hreflang="pt-pt" data-drupal-link-system-path="&lt;front&gt;" class="is-active" aria-current="page"><a href="/" class="language-link is-active" hreflang="pt-pt" data-drupal-link-system-path="&lt;front&gt;" aria-current="page">PT</a></li><li hreflang="en" data-drupal-link-system-path="&lt;front&gt;"><a href="/en" class="language-link" hreflang="en" data-drupal-link-system-path="&lt;front&gt;">EN</a></li></ul>
+  </div>
+
+                  </div>
+      </div>
+      <div class="header-bottom">
+        <div class="header-nav">
+          <div id="block-lusiadaslogo" class="header-nav-logo">
+              <div class="media media--type-image media--view-mode-default ds-1col clearfix">
+                                  <div id="block-lusiadaslogo">
+  
+    
+            <div class="image-block center">
+                  <a href="/homepage-lusiadas" target="">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+              <img width="480" height="480" src="/sites/default/files/2022-05/lg_lusiadas_00%20%283%29.svg" alt="Logo institucional" loading="lazy" />
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+                  </a>
+              </div>
+      </div>
+
+                              </div>
+          </div>
+          
+          
+          <nav role="navigation" aria-labelledby="block-lusiadassaude-main-menu-menu" id="block-lusiadassaude-main-menu" class="lusiadas-page-menu">
+            
+  <p class="visually-hidden" id="block-lusiadassaude-main-menu-menu">Main navigation</p>
+  
+
+        
+
+                <ul region="lusiadassaude_main_menu" class="menu">
+                        <li class="menu-icon menu-icon-18 menu-item">
+            <a href="/grupo-lusiadas-saude" class="menu-link" data-drupal-link-system-path="node/4934">Lusíadas</a>
+                      </li>
+                  <li class="menu-icon menu-icon-35 menu-item">
+            <a href="/hospitais-clinicas" class="menu-link" data-drupal-link-system-path="node/2131">Hospitais e Clínicas</a>
+                      </li>
+                  <li class="menu-icon menu-icon-22 menu-item">
+            <a href="/corpo-clinico" class="menu-link">Corpo Clínico</a>
+                      </li>
+                  <li class="menu-icon menu-icon-21 menu-item">
+            <a href="/especialidades" class="menu-link">Especialidades</a>
+                      </li>
+                  <li class="menu-icon menu-icon-871 menu-item">
+            <a href="/acordos" class="menu-link">Acordos</a>
+                      </li>
+                  <li class="menu-icon menu-icon-122 menu-item">
+            <a href="https://portal.maislusiadas.pt/" target="_blank" class="btn btn-context-primary btn-size-big menu-link">Marcações</a>
+                      </li>
+              </ul>
+      
+
+
+
+  </nav>
+
+          
+        </div>
+      </div>
     </div>
-    <div id="mapa"></div>
+    <div class="container header-content layout layout--1-column-layout">
+      <div class="layout__region layout__region--content">
+
+                  <div class="home-slider-wrapper">
+            
+                        <div class="paragraph paragraph--type--image-with-title paragraph--view-mode--default slider-item" slider-image-url="/sites/default/files/styles/convert_to_webp/public/2025-05/PODCAST_LUSIADAS_EP05_GUILHERME_DUARTE_1440x905.jpg.webp?itok=x_bn8nFi">
+      <h1>Podcast &#039;Dos Pés à Cabeça&#039;</h1>
+    <p>Não perca o 5.º episódio com Guilherme Duarte</p>
+          <a class="btn btn-context-tertiary btn-size-big" href="/podcast-pes-cabeca"
+        >
+        Ver mais
+      </a>
+        </div>
+
+                        <div class="paragraph paragraph--type--image-with-title paragraph--view-mode--default slider-item" slider-image-url="/sites/default/files/styles/convert_to_webp/public/2025-04/banner_equipa.jpg.webp?itok=Fi7I_Svi">
+      <h1>Junte-se a nós</h1>
+    <p>Veja as nossas oportunidades de recrutamento</p>
+          <a class="btn btn-context-tertiary btn-size-big" href="https://jobpage.cvwarehouse.com/?companyGuid=af1a9847-a9ab-4cd7-904e-d48470afea9a&amp;lang=pt-PT"
+        >
+        Ver mais
+      </a>
+        </div>
+
+                        <div class="paragraph paragraph--type--image-with-title paragraph--view-mode--default slider-item" slider-image-url="/sites/default/files/styles/convert_to_webp/public/2025-03/shutterstock_2462357635.jpg.webp?itok=1QhqmY-x">
+      <h1>Hospital Lusíadas Monsanto</h1>
+    <p>Cuidamos da saúde mental e neurológica num só lugar</p>
+          <a class="btn btn-context-tertiary btn-size-big" href="/hospitais-clinicas/hospital-lusiadas-monsanto"
+        >
+        Ver mais
+      </a>
+        </div>
+
+                        <div class="paragraph paragraph--type--image-with-title paragraph--view-mode--default slider-item" slider-image-url="/sites/default/files/styles/convert_to_webp/public/2025-05/MesCorac%CC%A7a%CC%83o2025_1440x905.jpg.webp?itok=LCbE9sfJ">
+      <h1>Maio: Mês do Coração </h1>
+    <p>Entregue o seu coração a quem sabe cuidar</p>
+          <a class="btn btn-context-tertiary btn-size-big" href="/especialidades/cardiologia"
+        >
+        Ver mais
+      </a>
+        </div>
+
+                        <div class="paragraph paragraph--type--image-with-title paragraph--view-mode--default slider-item" slider-image-url="/sites/default/files/styles/convert_to_webp/public/2024-02/HeyDoc_header_1440x905_3.jpg.webp?itok=Kec6A8sS">
+      <h1>Clínicas HeyDoc</h1>
+    <p>A rede de Clínicas Dentárias da Lusíadas Saúde</p>
+          <a class="btn btn-context-tertiary btn-size-big" href="https://www.heydoc.pt/"
+        >
+        Ver mais
+      </a>
+        </div>
+
+                        <div class="paragraph paragraph--type--image-with-title paragraph--view-mode--default slider-item" slider-image-url="/sites/default/files/styles/convert_to_webp/public/2025-01/Lusi%CC%81adasSport_1440x905_0.png.webp?itok=mykrYiMf">
+      <h1>Lusíadas Sport</h1>
+    <p>Oferta de 1 treino experimental, personalizado e com PT</p>
+          <a class="btn btn-context-tertiary btn-size-big" href="/lusiadas-sport"
+        >
+        Ver mais
+      </a>
+        </div>
+
+
+          </div>
+              </div>
+    </div>
+  </div>
+</header>
+  
+
+  </div>
+
+
+  <main class="main page-node-homepage" role="main">
+
+    
+    <div data-drupal-messages-fallback class="hidden"></div>
+  
+    
+      <article data-history-node-id="2016">
+
+  
+    
+
+  
+  <div>
+      <section class="section section-search">
+          <div class="container">
+              <div  class="layout__region layout__region--content">
+        <div>
+  
+    
+      <section class="lusiadas-search-wrap card card-doc-spec container"><form class="lusidadas-search" data-drupal-selector="lusidadas-search" action="/" method="post" id="lusidadas-search" accept-charset="UTF-8">
+  <div class="field-doc" id="doc-search"><div class="js-form-item form-item js-form-type-textfield form-item-search-doctor js-form-item-search-doctor form-no-label">
+      <label for="edit-search-doctor" class="visually-hidden">Pesquisar por médico</label>
+        <img class="search-medico-icon" src="/themes/custom/lusiadassaude/svg/ic_search_especialidade.svg" alt="ic pesquisa especialidade">
+<input placeholder="Pesquisar por médico" class="input input-doc form-autocomplete lusiadas-search-input form-text ui-autocomplete-input form-autocomplete form-text" style="background-image: none;" data-drupal-selector="edit-search-doctor" data-autocomplete-path="/lusiadas_custom/lusidadas_search/autocomplete_practitioners" type="text" id="edit-search-doctor" name="search-doctor" value="" size="60" maxlength="128" />
+
+
+        </div>
+</div><input id="search-control" data-drupal-selector="edit-search-control" type="hidden" name="search-control" value="" />
+<div class="field-spec" id="spec-search"><div class="js-form-item form-item js-form-type-textfield form-item-search-specialty js-form-item-search-specialty form-no-label">
+      <label for="edit-search-specialty" class="visually-hidden">Pesquisar por especialidade</label>
+        <img class="search-medico-icon" src="/themes/custom/lusiadassaude/svg/ic_search_medico.svg" alt="ic pesquisa médico">
+<input placeholder="Pesquisar por especialidade, consulta ou exame" class="input input-spec form-autocomplete form-text" style="background-image: none;" data-drupal-selector="edit-search-specialty" data-autocomplete-path="/lusiadas_custom/lusidadas_search/autocomplete_specialties" type="text" id="edit-search-specialty" name="search-specialty" value="" size="60" maxlength="128" />
+
+
+        </div>
+</div><div class="field-doc-spec" id="doc-spec-search"><div class="js-form-item form-item js-form-type-textfield form-item-search-doctor-specialty js-form-item-search-doctor-specialty form-no-label">
+      <label for="edit-search-doctor-specialty" class="visually-hidden">Pesquisa por Médico ou Especialidade</label>
+        <img class="search-medico-icon" src="/themes/custom/lusiadassaude/svg/ic_search_medico.svg" alt="ic pesquisa médico especialidade">
+<input placeholder="Pesquisa por Médico ou Especialidade" class="input input-doc-spec form-autocomplete form-text" style="background-image: none;" data-drupal-selector="edit-search-doctor-specialty" data-autocomplete-path="/lusiadas_custom/lusidadas_search/autocomplete_practitioners_specialties" type="text" id="edit-search-doctor-specialty" name="search-doctor-specialty" value="" size="60" maxlength="128" />
+
+        </div>
+</div><input id="search" style="display: none;" class="btn-submit button js-form-submit form-submit" data-drupal-selector="edit-submit" type="submit" name="op" value="Submeter" />
+<input autocomplete="off" data-drupal-selector="form-acsiifmkgwsaneyzdee14it1hjeilwy5ruppijygb1q" type="hidden" name="form_build_id" value="form-AcSIIFMkgWsAneyzDeE14iT1hjEilwY5rUpPijYGb1Q" />
+<input data-drupal-selector="edit-lusidadas-search" type="hidden" name="form_id" value="lusidadas-search" />
+
+</form>
+</section>
+
+  </div>
+<div>
+  
+    
+      <section class="section section-attendence">
+  <div class="container attendence-container">
+    <div class="layout layout--2-columns-50-50-layout atendimentos-wrap">
+      <div class="atendimentos-wrap-container closest-orgnization">
+        <div class="layout__region layout__region--sidebar_left layout__region--sidebar_left-shadow">
+          <div class="last-update-data">
+            <svg class="last-update-clock" width="23px" height="23px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Homepage-2" transform="translate(-1165.000000, -944.000000)" fill="#DDE3ED">
+                  <path d="M1176.5,967 C1182.82494,967 1188,961.824939 1188,955.5 C1188,949.175061 1182.82494,944 1176.5,944 C1170.17506,944 1165,949.175061 1165,955.5 C1165,961.824939 1170.17506,967 1176.5,967 Z M1176.5,945.916544 C1181.78988,945.916544 1186.08321,950.209877 1186.08321,955.499755 C1186.08321,960.789632 1181.78988,965.082965 1176.5,965.082965 C1171.21012,965.082965 1166.91679,960.789632 1166.91679,955.499755 C1166.91679,950.209877 1171.21012,945.916544 1176.5,945.916544 Z M1175.81,956.189877 C1175.61833,955.998211 1175.54165,955.768198 1175.54165,955.499877 L1175.54165,950.21 C1175.54165,949.673333 1175.96333,949.251679 1176.49998,949.251679 C1177.03662,949.251679 1177.4583,949.673358 1177.4583,950.21 L1177.4583,955.116667 L1179.71998,957.378346 C1180.10331,957.761679 1180.10331,958.375012 1179.71998,958.720025 C1179.52831,958.911691 1179.2983,958.98837 1179.02998,958.98837 C1178.76165,958.98837 1178.53165,958.911703 1178.33998,958.720025 L1175.81,956.189877 Z" id="Fill-1"></path>
+                </g>
+              </g>
+            </svg>
+            <div class="s-tooltip tooltip">
+              <div class="arrow-up"></div>
+              <p class="tooltip-content">
+                <strong>Last Update</strong>
+                10/05/2025 15:49:02
+              </p>
+            </div>
+          </div>
+          <div class="sidebar-title">
+            <span>Tempo de Espera</span>
+            <span>Atendimento Urgente</span>
+          </div>
+                      <div class="attendence-content">
+              <h3 class="attendence-title dropdown-title">
+                                  Hospital Lusíadas Lisboa
+                              </h3>
+              <div class="list-tooltip attendence-list-wrapper attendence-list-wrapper-urgency">
+                <ul class="attendence-list">
+                                                            <li class="views-row " data-uid="1" data-coord=",">
+                        <div class="views-field views-field-title">
+                          <span class="field-content">Hospital Lusíadas Porto</span>
+                        </div>
+                      </li>
+                                          <li class="views-row " data-uid="13" data-coord=",">
+                        <div class="views-field views-field-title">
+                          <span class="field-content">Hospital Lusíadas Braga</span>
+                        </div>
+                      </li>
+                                          <li class="views-row views-row--is-selected" data-uid="4" data-coord=",">
+                        <div class="views-field views-field-title">
+                          <span class="field-content">Hospital Lusíadas Lisboa</span>
+                        </div>
+                      </li>
+                                          <li class="views-row " data-uid="41" data-coord=",">
+                        <div class="views-field views-field-title">
+                          <span class="field-content">Hospital Lusíadas Amadora</span>
+                        </div>
+                      </li>
+                                          <li class="views-row " data-uid="8" data-coord=",">
+                        <div class="views-field views-field-title">
+                          <span class="field-content">Hospital Lusíadas Albufeira</span>
+                        </div>
+                      </li>
+                                                      </ul>
+              </div>
+                                                <div class="urgency-wait-time attendence-unit " data-distance="" data-uid="1">
+                                    <div class="schedule">
+                                                                        <p>Atendimento Urgente 24h | Adultos e Pediátrico</p>
+                                                                                                                </div>
+
+                                      <div class="adult">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Adulto</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">01h
+                                                                      </span>20min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>17min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                      <div class="pediatrics">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_pediatria.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Pediatria</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>23min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>17min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                    <div class="bottom-section has-text-centered mt-2 ">
+                    <a latitude="41.15738" longitude="-8.625954" href="https://www.google.com/maps/dir/?api=1&destination=41.15738,-8.625954" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="0"><span>Como chegar</span></a>
+
+                    <div class="distance">
+                      <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                      <span id="distance-to-hospital">--km</span>
+                    </div>
+                  </div>
+                </div>
+                                                <div class="urgency-wait-time attendence-unit " data-distance="" data-uid="13">
+                                    <div class="schedule">
+                                                                        <p>Atendimento Urgente 24h | Adultos<br />
+Atendimento Urgente Pediátrico Todos os dias: 8h às 22h</p>
+                                                                                                                </div>
+
+                                      <div class="adult">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Adulto</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>30min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>30min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                      <div class="pediatrics">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_pediatria.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Pediatria</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>02min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>02min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                    <div class="bottom-section has-text-centered mt-2 ">
+                    <a latitude="41.547433" longitude="-8.42243" href="https://www.google.com/maps/dir/?api=1&destination=41.547433,-8.42243" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="0"><span>Como chegar</span></a>
+
+                    <div class="distance">
+                      <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                      <span id="distance-to-hospital">--km</span>
+                    </div>
+                  </div>
+                </div>
+                                                <div class="urgency-wait-time attendence-unit attendence-unit--is-selected" data-distance="" data-uid="4">
+                                    <div class="schedule">
+                                                                        <p>Atendimento Urgente 24h | ​Adultos, Pediátrico, Ginecologia e Obstetrícia</p>
+                                                                                                                </div>
+
+                                      <div class="adult">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Adulto</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>21min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>18min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                      <div class="pediatrics">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_pediatria.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Pediatria</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>04min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>13min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                    <div class="bottom-section has-text-centered mt-2 ">
+                    <a latitude="38.748943" longitude="-9.176475" href="https://www.google.com/maps/dir/?api=1&destination=38.748943,-9.176475" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="0"><span>Como chegar</span></a>
+
+                    <div class="distance">
+                      <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                      <span id="distance-to-hospital">--km</span>
+                    </div>
+                  </div>
+                </div>
+                                                <div class="urgency-wait-time attendence-unit " data-distance="" data-uid="41">
+                                    <div class="schedule">
+                                                                        <p>Atendimento Urgente Adultos: 08h às 22h</p>
+                                                                                                                </div>
+
+                                      <div class="adult">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Adulto</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>03min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>02min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                    <div class="bottom-section has-text-centered mt-2 ">
+                    <a latitude="38.748693" longitude="-9.229635" href="https://www.google.com/maps/dir/?api=1&destination=38.748693,-9.229635" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="0"><span>Como chegar</span></a>
+
+                    <div class="distance">
+                      <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                      <span id="distance-to-hospital">--km</span>
+                    </div>
+                  </div>
+                </div>
+                                                <div class="urgency-wait-time attendence-unit " data-distance="" data-uid="8">
+                                    <div class="schedule">
+                                                                        <p>Atendimento Urgente Adultos 24h</p>
+                                                                                                                </div>
+
+                                      <div class="adult">
+                      <div class="unit-img">
+                        <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                      </div>
+                      <div>
+                        <p class="specialty">Adulto</p>
+                                                  <ul class="hours">
+                                                          <li class="gr-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Verde (Triagem de Manchester) - Casos pouco urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>10min
+                                                                                                </li>
+                                                          <li class="yl-status">
+                                <div class="div-marker">
+                                  <div class="s-tooltip tooltip">
+                                    <div class="arrow-up"></div>
+                                    <p class="tooltip-content">
+                                                                              Pulseira Amarela (Triagem de Manchester) - Casos urgentes
+                                                                          </p>
+                                  </div>
+                                </div>
+                                                                  <span class="thick">00h
+                                                                      </span>02min
+                                                                                                </li>
+                                                      </ul>
+                                              </div>
+                    </div>
+                                    <div class="bottom-section has-text-centered mt-2 ">
+                    <a latitude="37.1032" longitude="-8.2335" href="https://www.google.com/maps/dir/?api=1&destination=37.1032,-8.2335" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="0"><span>Como chegar</span></a>
+
+                    <div class="distance">
+                      <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                      <span id="distance-to-hospital">--km</span>
+                    </div>
+                  </div>
+                </div>
+                          </div>
+          
+          <div class="atend-btm-mobile layout layout--1-column-layout local">
+            <div class="layout__region layout__region--content">
+              <div>
+                <div>
+                  <p  class="activate-location">
+                    Para ver os hospitais e clínicas mais perto de si, <span id="activate-location">ative a sua localização</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="atendimentos-wrap-container atendimentos-wrap-container-right">
+        <div class="layout__region layout__region--sidebar_right layout__region--sidebar_right-shadow">
+          <div class="sidebar-title">
+            <span>Horário</span>
+            <span>Consulta sem marcação</span>
+          </div>
+          <div class="attendence-content">
+            <h3 class="attendence-title dropdown-title">
+                              Clínica Lusíadas Almada
+                          </h3>
+            <div class="list-tooltip attendence-list-wrapper attendence-list-wrapper-appointment">
+              <ul class="attendence-list">
+
+                                                <li class="views-row views-row--is-selected" data-uid="5" data-coord="38.660081,-9.175387">
+                    <div class="views-field views-field-title">
+                      <span class="field-content">Clínica Lusíadas Almada</span>
+                    </div>
+                  </li>
+                                  <li class="views-row " data-uid="42" data-coord="38.79424,-9.103562">
+                    <div class="views-field views-field-title">
+                      <span class="field-content">Clínica Lusíadas Oriente</span>
+                    </div>
+                  </li>
+                                  <li class="views-row " data-uid="10" data-coord="37.019905,-7.929592">
+                    <div class="views-field views-field-title">
+                      <span class="field-content">Clínica Lusíadas Faro</span>
+                    </div>
+                  </li>
+                                  <li class="views-row " data-uid="16" data-coord="37.08085612,-8.11387725">
+                    <div class="views-field views-field-title">
+                      <span class="field-content">Hospital Lusíadas Vilamoura</span>
+                    </div>
+                  </li>
+                                  <li class="views-row " data-uid="17" data-coord="40.927189,-8.572576">
+                    <div class="views-field views-field-title">
+                      <span class="field-content">Hospital Lusíadas Santa Maria da Feira</span>
+                    </div>
+                  </li>
+                                  <li class="views-row " data-uid="44" data-coord="41.284459,-8.360726">
+                    <div class="views-field views-field-title">
+                      <span class="field-content">Hospital Lusíadas Paços de Ferreira</span>
+                    </div>
+                  </li>
+                              
+              </ul>
+            </div>
+                                        <div class="open-apointments attendence-unit attendence-unit--is-selected" data-distance="" data-uid="5">
+                              <div class="schedule">
+                  <p>&nbsp;</p>
+                </div>
+                                <div class="adult">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                  </div>
+                  <div>
+                    <p class="specialty">Adulto</p>
+                    <ul class="hours">
+                      <li>
+                        Medicina Geral e Familiar: <br />
+dias úteis: 8h às 22h, <br />
+sábados: 9h às 20h, <br />
+domingos: 10h às 14h
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                                                <div class="bottom-section has-text-centered mt-2 ">
+                  <a latitude="38.660081" longitude="-9.175387" href="https://www.google.com/maps/dir/?api=1&destination=38.660081,-9.175387" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="-1"><span>Como chegar</span></a>
+
+                  <div class="distance">
+                    <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                    <span id="distance-to-hospital">--km</span>
+                  </div>
+                </div>
+              </div>
+                                        <div class="open-apointments attendence-unit " data-distance="" data-uid="42">
+                              <div class="schedule">
+                  <p>&nbsp;</p>
+                </div>
+                                <div class="adult">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                  </div>
+                  <div>
+                    <p class="specialty">Adulto</p>
+                    <ul class="hours">
+                      <li>
+                        Medicina Geral e Familiar - dias úteis: 8h às 19h, sábados: 8h às 17h
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                                                <div class="bottom-section has-text-centered mt-2 ">
+                  <a latitude="38.79424" longitude="-9.103562" href="https://www.google.com/maps/dir/?api=1&destination=38.79424,-9.103562" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="-1"><span>Como chegar</span></a>
+
+                  <div class="distance">
+                    <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                    <span id="distance-to-hospital">--km</span>
+                  </div>
+                </div>
+              </div>
+                                        <div class="open-apointments attendence-unit " data-distance="" data-uid="10">
+                              <div class="schedule">
+                  <p>&nbsp;</p>
+                </div>
+                                <div class="adult">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                  </div>
+                  <div>
+                    <p class="specialty">Adulto</p>
+                    <ul class="hours">
+                      <li>
+                        Clínica Geral: todos os dias, 8h às 21h
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                                                <div class="pediatrics">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_pediatria.svg" width="156">
+                  </div>
+
+                  <div>
+                    <p class="specialty">Pediatria</p>
+                                        <ul class="hours">
+                      <li>
+                        Pediatria: todos os dias, 8h às 21h
+                      </li>
+                    </ul>
+                                      </div>
+                </div>
+                                <div class="bottom-section has-text-centered mt-2 ">
+                  <a latitude="37.019905" longitude="-7.929592" href="https://www.google.com/maps/dir/?api=1&destination=37.019905,-7.929592" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="-1"><span>Como chegar</span></a>
+
+                  <div class="distance">
+                    <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                    <span id="distance-to-hospital">--km</span>
+                  </div>
+                </div>
+              </div>
+                                        <div class="open-apointments attendence-unit " data-distance="" data-uid="16">
+                              <div class="schedule">
+                  <p>&nbsp;</p>
+                </div>
+                                <div class="adult">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                  </div>
+                  <div>
+                    <p class="specialty">Adulto</p>
+                    <ul class="hours">
+                      <li>
+                        Todos os dias: 24h
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                                                <div class="bottom-section has-text-centered mt-2 ">
+                  <a latitude="37.08085612" longitude="-8.11387725" href="https://www.google.com/maps/dir/?api=1&destination=37.08085612,-8.11387725" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="-1"><span>Como chegar</span></a>
+
+                  <div class="distance">
+                    <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                    <span id="distance-to-hospital">--km</span>
+                  </div>
+                </div>
+              </div>
+                                        <div class="open-apointments attendence-unit " data-distance="" data-uid="17">
+                              <div class="schedule">
+                  <p>&nbsp;</p>
+                </div>
+                                <div class="adult">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                  </div>
+                  <div>
+                    <p class="specialty">Adulto</p>
+                    <ul class="hours">
+                      <li>
+                        Medicina Geral e Familiar:<br />
+dias úteis: 8h00 às 20h00,<br />
+sábados: 8h00 às 13h00
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                                                <div class="pediatrics">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_pediatria.svg" width="156">
+                  </div>
+
+                  <div>
+                    <p class="specialty">Pediatria</p>
+                                        <ul class="hours">
+                      <li>
+                        Medicina Geral e Familiar:<br />
+dias úteis: 8h00 às 20h00,<br />
+sábados: 8h00 às 13h00
+                      </li>
+                    </ul>
+                                      </div>
+                </div>
+                                <div class="bottom-section has-text-centered mt-2 ">
+                  <a latitude="40.927189" longitude="-8.572576" href="https://www.google.com/maps/dir/?api=1&destination=40.927189,-8.572576" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="-1"><span>Como chegar</span></a>
+
+                  <div class="distance">
+                    <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                    <span id="distance-to-hospital">--km</span>
+                  </div>
+                </div>
+              </div>
+                                        <div class="open-apointments attendence-unit " data-distance="" data-uid="44">
+                              <div class="schedule">
+                  <p>&nbsp;</p>
+                </div>
+                                <div class="adult">
+                  <div class="unit-img">
+                    <img alt="hospital" height="150" src="/themes/custom/lusiadassaude/svg/ic_adulto.svg" width="156">
+                  </div>
+                  <div>
+                    <p class="specialty">Adulto</p>
+                    <ul class="hours">
+                      <li>
+                        Todos os dias: 08h00 às 22h00
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                                                <div class="bottom-section has-text-centered mt-2 ">
+                  <a latitude="41.284459" longitude="-8.360726" href="https://www.google.com/maps/dir/?api=1&destination=41.284459,-8.360726" target="_blank" class="btn btn-context-secondary btn-size-big btn--attendence-unit" tabindex="-1"><span>Como chegar</span></a>
+
+                  <div class="distance">
+                    <img src="/themes/custom/lusiadassaude/svg/ic_pin_grey.svg" alt="pin" width="26" height="22">
+                    <span id="distance-to-hospital">--km</span>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+
+          <div class="atend-btm-mobile layout layout--1-column-layout local">
+            <div class="layout__region layout__region--content">
+              <div>
+                <div>
+                  <p  class="activate-location">
+                    Para ver os hospitais e clínicas mais perto de si, <span id="activate-location">ative a sua localização</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    <div class="atend-btm-tablet layout layout--1-column-layout local">
+      <div class="layout__region layout__region--content">
+        <div>
+          <div>
+            <p  class="activate-location">
+              Para ver os hospitais e clínicas mais perto de si, <span id="activate-location">ative a sua localização</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tooltip-geolocation-background" class="tooltip-background visually-hidden">
+    <div class="subscribe-tooltip-geolocation tooltip-content-default">
+      <p>A localização tem de ser permitida nas definições do browser</p>
+      <button class="btn btn--green btn--primary btn--small" id="close-tooltip-geolocation-btn">Fechar</button>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+      </div>
+          </div>
+  </section>
+  <section class="section section-blog">
+          <div class="container">
+              <div  class="layout__region layout__region--content">
+        <div>
+	
+        	
+	    <div class="text-primary">
+      
+            <div><div class="blog-header-wrap">
+<h2 class="main-title">Blog Lusíadas</h2>
+
+<form action="/blog/blog-listagem" class="search-blog" id="form" method="GET"><img alt="search-icon" src="/themes/custom/lusiadassaude/svg/ic_search_blue.svg"><input style="display:none" type="submit"> <input class="search-input" name="search_query" placeholder="Faça a sua pesquisa no Blog" type="text">&nbsp;</form>
+</div>
+</div>
+      
+    </div>
+  </div>
+
+
+<div class="views-element-container">
+  
+    
+      <div><div class="block-blog js-view-dom-id-32a5616b9eb6848ca9357d5a7cb6df72622d7b688bfe07df7679bcf429709337">
+  
+  
+  
+
+  
+  
+  
+
+  <div class="columns is-desktop">
+      <div class="views-row column is-8-desktop blog-wrapper-adjust">
+        <div class="blog-card-wrapper blog-card-wrapper-large">
+                <div class="views-row"><article data-history-node-id="5802012" class="blog-card blog-card-large">
+  
+  
+  <div class="blog-image">
+    
+  <div>
+    <div class="visually-hidden">Media</div>
+              <div><div class="media media--type-image media--view-mode-block-blog-teaser ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/block_blog_teaser_main/public/2025-04/20250409_LS_Luto-Criancas_647x388_VB_1.png.webp?itok=jp_PgaRs 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="250" height="272"/>
+              <source srcset="/sites/default/files/styles/block_blog_teaser_main/public/2025-04/20250409_LS_Luto-Criancas_647x388_VB_1.png.webp?itok=jp_PgaRs 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="250" height="272"/>
+                  <img width="647" height="388" loading="lazy" src="/sites/default/files/styles/block_blog_teaser_main/public/2025-04/20250409_LS_Luto-Criancas_647x388_VB_1.png.webp?itok=jp_PgaRs" alt="Luto" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+          </div>
+
+  </div>
+  <div class="content">
+    <div class="node node--type-blog node--view-mode-teaser-blog clearfix">
+      <div class="tag-readtime-wrapper">
+        <a href="/blog/saude-mental/criancas/como-explicar-morte-criancas" class="tag-component text-clip">
+          Saúde Mental
+        </a>
+      </div>
+      <h3 class="blog-post-title--big">Como explicar a morte às crianças?</h3>
+      <p class="description">Explicar a morte a uma criança é um desafio que exige sensibilidade, honestidade e uma abordagem adequada à sua idade e nível de compreensão. Falar abertamente sobre o tema pode ajudar os mais pequenos a compreender a perda e a desenvolver mecanismos saudáveis de reação para o futuro. Leia o artigo completo e descubra como explicar a morte às crianças de forma tranquila e reconfortante.
+
+</p>
+    </div>
+  </div>
+  <a class="card-link" href="/blog/saude-mental/criancas/como-explicar-morte-criancas">Como explicar a morte às crianças?</a>
+</article>
+</div>
+
+        </div>
+      </div>
+      <div class="views-row column is-4-desktop blog-attachments">
+        <div class="views-element-container"><div class="block-blog js-view-dom-id-f163f91417d10f61ac7819ee55dbef443f2367116e24d2b4a2e89e9882d43d4f">
+  
+  
+  
+
+  
+  
+  
+
+      <div class="views-row"><div class="blog-card-wrapper">
+  <article data-history-node-id="5802011" class="blog-card blog-card-small blog-card-adjust">
+    
+    
+    <div class="blog-image">
+      
+  <div>
+    <div class="visually-hidden">Media</div>
+              <div><div class="media media--type-image media--view-mode-block-blog-teaser-attachments ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/block_blog_teaser_attachments/public/2025-04/20250420_LS_Obesidade-fertilidade_647x388_VB.png.webp?itok=3vc7Y9lj 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="112" height="112"/>
+              <source srcset="/sites/default/files/styles/block_blog_teaser_attachments/public/2025-04/20250420_LS_Obesidade-fertilidade_647x388_VB.png.webp?itok=3vc7Y9lj 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="112" height="112"/>
+                  <img width="647" height="388" loading="lazy" src="/sites/default/files/styles/block_blog_teaser_attachments/public/2025-04/20250420_LS_Obesidade-fertilidade_647x388_VB.png.webp?itok=3vc7Y9lj" alt="obesidade gravidez" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+          </div>
+
+    </div>
+    <div class="content">
+      <div class="node node--type-blog node--view-mode-teaser-blog clearfix">
+        <a href="/blog/saude-mulher/saude-familia/obesidade-fertilidade-excesso-peso-tem-impacto-capacidade" class="tag-component text-clip">
+          Saúde da Mulher
+        </a>
+        <h3 class="blog-post-title">Obesidade e Fertilidade: O excesso de peso tem impacto na capacidade reprodutiva?</h3>
+      </div>
+    </div>
+    <a class="card-link" href="/blog/saude-mulher/saude-familia/obesidade-fertilidade-excesso-peso-tem-impacto-capacidade">Obesidade e Fertilidade: O excesso de peso tem impacto na capacidade reprodutiva?</a>
+  </article>
+</div>
+</div>
+    <div class="views-row"><div class="blog-card-wrapper">
+  <article data-history-node-id="5784153" class="blog-card blog-card-small blog-card-adjust">
+    
+    
+    <div class="blog-image">
+      
+  <div>
+    <div class="visually-hidden">Media</div>
+              <div><div class="media media--type-image media--view-mode-block-blog-teaser-attachments ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/block_blog_teaser_attachments/public/2025-04/20250409_LS_utilizacao-IA_647x388_VB.png.webp?itok=R5rYVbNT 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="112" height="112"/>
+              <source srcset="/sites/default/files/styles/block_blog_teaser_attachments/public/2025-04/20250409_LS_utilizacao-IA_647x388_VB.png.webp?itok=R5rYVbNT 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="112" height="112"/>
+                  <img width="647" height="388" loading="lazy" src="/sites/default/files/styles/block_blog_teaser_attachments/public/2025-04/20250409_LS_utilizacao-IA_647x388_VB.png.webp?itok=R5rYVbNT" alt="Inteligencia Artificial" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+          </div>
+
+    </div>
+    <div class="content">
+      <div class="node node--type-blog node--view-mode-teaser-blog clearfix">
+        <a href="/blog/saude-mental/inteligencia-artificial-pode-afetar-nossa-capacidade-pensar" class="tag-component text-clip">
+          Saúde Mental
+        </a>
+        <h3 class="blog-post-title">A Inteligência Artificial pode afetar a nossa capacidade de pensar?</h3>
+      </div>
+    </div>
+    <a class="card-link" href="/blog/saude-mental/inteligencia-artificial-pode-afetar-nossa-capacidade-pensar">A Inteligência Artificial pode afetar a nossa capacidade de pensar?</a>
+  </article>
+</div>
+</div>
+
+    
+
+  
+  
+
+  
+  
+</div>
+</div>
+
+      </div>
+    </div>
+    
+
+
+  
+
+  
+  
+</div>
+</div>
+
+  </div>
+<div>
+	
+        	
+	    <div class="text-primary">
+      
+            <div><div class="subscrever-news"><a href="#newsletter2-block">Subscrever e-news </a> <a class="btn btn-context-secondary btn-size-big" href="/blog"> <span>Ver blog </span></a></div>
+</div>
+      
+    </div>
+  </div>
+
+
+
+      </div>
+          </div>
+  </section>
+  <section class="section section-blue-highlight">
+          <div class="container">
+              <div  class="layout__region layout__region--content">
+        <div class="heydoc-view-mode">
+    
+    
+    <div class="columns columns-main">
+        <div class="column section-blue-highlight__text-wrapper-centered">
+                            
+<div  class="columns">
+      
+<div  class="column is-2">
+      
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2024-11/Logo-Pop-Up-Agendamentos-HeyDoc-Banner-Site.png.webp?itok=SHoidYQ0 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="388" height="388"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2024-11/Logo-Pop-Up-Agendamentos-HeyDoc-Banner-Site.png.webp?itok=SHoidYQ0 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="388" height="388"/>
+                  <img width="388" height="388" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2024-11/Logo-Pop-Up-Agendamentos-HeyDoc-Banner-Site.png.webp?itok=SHoidYQ0" alt="logo heydoc" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+  </div>
+
+<div  class="column">
+      
+<h2  class="main-title">
+      
+            <div>Agendamentos HeyDoc</div>
+      
+  </h2>
+
+<div  class="text-primary text-primary--large text-color-white">
+      
+            <div><p>Para consultar os seus agendamentos de medicina dentária entre em contacto connosco através do número</p></div>
+      
+  </div>
+
+<div >
+      
+      <div class="section-blue-highlight__button-wrapper">
+              <a class="btn btn-size-big btn-context-secondary" href="tel:211 547 471" target=""><span>211 547 471</span></a>
+              <a class="btn btn-size-big btn-context-secondary" href="https://www.heydoc.pt/" target=""><span>Saiba mais</span></a>
+          </div>
+  
+  </div>
+
+  </div>
+
+  </div>
+
+                    </div>
+    </div>
+</div>
+
+      </div>
+          </div>
+  </section>
+  <section class="section section-highlights">
+          <div class="container">
+              <div  class="layout__region layout__region--content">
+        <div>
+  
+    
+      
+            <div><h3 class="main-sub-title">Outros Destaques</h3>
+</div>
+      
+  </div>
+<div>
+  
+    
+      <div class="container block-content block-content--type-other-highlights block-content--view-mode-full ds-1col clearfix">
+
+  
+
+  
+<div  class="columns highlights-blocks-wrapper">
+      
+<div  class="column highlights-blocks-col-left">
+      
+<div  class="columns highlights-blocks-col-left-primary">
+      
+<div  class="column">
+          
+            <div  class="top-tile tile-block">
+                  <div class="paragraph paragraph--type-card-horizontal-medium paragraph--view-mode-default ds-1col clearfix">
+
+  
+
+      
+            <div  class="card-image background-layer">
+                  <div class="media media--type-image media--view-mode-full ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2025-03/Linha_Saude_Destaque_505x540_02.png.webp?itok=cWhrukq7 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="505" height="540"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2025-03/Linha_Saude_Destaque_505x540_02.png.webp?itok=cWhrukq7 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="505" height="540"/>
+                  <img width="505" height="540" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2025-03/Linha_Saude_Destaque_505x540_02.png.webp?itok=cWhrukq7" alt="Linha de Saude Destaque 2" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+
+      
+      </div>
+  
+
+    
+            <span  class="tag-blue highlighted-tag">
+                  Linha de Saúde
+      
+      </span>
+  
+
+    
+                                <a href="/linha-saude-lusiadas" class="link">Não adie a sua saúde</a>
+                      
+  
+
+    
+            <div  class="description">
+                  Avaliação clínica gratuita por telefone realizada por enfermeiros qualificados
+      
+      </div>
+  
+
+
+
+</div>
+
+
+      
+      </div>
+  
+
+
+  </div>
+
+  </div>
+
+<div  class="columns highlights-blocks-col-left-secondary">
+      
+<div  class="column">
+          
+            <div  class="tile-block tile-block-blue-background bottom-tile">
+                  <div class="paragraph paragraph--type-card-small-with-icon paragraph--view-mode-default ds-1col clearfix">
+
+  
+
+      
+            <div class="link-icon">
+                      <a href="/blog">Blog Lusíadas</a>
+            
+    </div>
+  
+
+
+<div  class="description">
+          
+            Conheça o nosso Blog
+      
+  
+
+
+  </div>
+
+
+</div>
+
+
+      
+      </div>
+  
+
+
+  </div>
+
+<div  class="column">
+          
+            <div  class="tile-block bottom-tile">
+                  <div class="paragraph paragraph--type-card-horizontal-small paragraph--view-mode-default ds-1col clearfix">
+
+  
+
+      
+            <span  class="tag-blue highlighted-tag">
+                  Lusíadas Plan
+      
+      </span>
+  
+
+    
+                              <a href="/lusiadas-plan" class="link ddd">Saiba mais</a>
+                      
+  
+
+    
+            <div  class="description">
+                  Lusíadas Plan. O nosso plano é cuidar de si
+      
+      </div>
+  
+
+
+
+</div>
+
+
+      
+      </div>
+  
+
+
+  </div>
+
+  </div>
+
+  </div>
+
+  
+                         <div class="column hightlighs-right">
+      <div class="columns">
+        <div class="column">
+          <div class="tile-block hightlighs-right-top">
+           <div><div class="paragraph paragraph--type-card-horizontal-large-1-or-2 paragraph--view-mode-default ds-1col clearfix">
+
+  
+
+      
+            <div  class="tag-blue highlighted-tag">
+            <span>Lusíadas Sport</span>
+      
+      </div>
+  
+
+    
+            <div class="link-icon">
+                              <a href="/lusiadas-sport" class="link ddd">Saiba mais</a>
+                      
+    </div>
+  
+
+    
+            <div  class="description">
+                  Lusíadas Sport
+      
+      </div>
+  
+
+
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2024-11/L_sport_imagens_site_destaque_416x320.png.webp?itok=UDl6xFzg 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="416" height="320"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2024-11/L_sport_imagens_site_destaque_416x320.png.webp?itok=UDl6xFzg 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="416" height="320"/>
+                  <img width="416" height="320" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2024-11/L_sport_imagens_site_destaque_416x320.png.webp?itok=UDl6xFzg" alt="Destaque inferior Lusíadas Sport" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+</div>
+
+</div>
+          </div>
+        </div>
+      </div>
+                                <div class="columns">
+            <div class="column">
+              <div class="tile-block hightlighs-right-bottom">
+                <div><div class="paragraph paragraph--type-card-horizontal-large-1-or-2 paragraph--view-mode-default ds-1col clearfix">
+
+  
+
+      
+            <div  class="tag-blue highlighted-tag">
+            <span>Check-Ups </span>
+      
+      </div>
+  
+
+    
+            <div class="link-icon">
+                              <a href="/check-up-lusiadas" class="link ddd">Saiba mais</a>
+                      
+    </div>
+  
+
+    
+            <div  class="description">
+                  Faça o seu check-up
+      
+      </div>
+  
+
+
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2024-03/Check_Up_416x231_0.jpg.webp?itok=yV6o5J53 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="832" height="462"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2024-03/Check_Up_416x231_0.jpg.webp?itok=yV6o5J53 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="832" height="462"/>
+                  <img width="832" height="462" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2024-03/Check_Up_416x231_0.jpg.webp?itok=yV6o5J53" alt="checkups" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+</div>
+
+</div>
+              </div>
+            </div>
+          </div>
+          </div>
+                        
+  </div>
+
+
+</div>
+
+
+  </div>
+
+      </div>
+          </div>
+  </section>
+  <section class="section section-blue-highlight">
+          <div class="container">
+              <div  class="layout__region layout__region--content">
+        <div>
+    
+    
+    <div class="columns">
+        <div class="column section-blue-highlight__text-wrapper-centered">
+                            
+<div  class="columns">
+      
+<div  class="column is-2 image-column">
+      
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2021-12/whatsapp_icon_peq.png.webp?itok=_3mSyGQ- 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="83" height="83"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2021-12/whatsapp_icon_peq.png.webp?itok=_3mSyGQ- 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="83" height="83"/>
+                  <img width="83" height="83" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2021-12/whatsapp_icon_peq.png.webp?itok=_3mSyGQ-" alt="s" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+  </div>
+
+<div  class="column">
+      
+<h2  class="main-title">
+      
+            <div>Fale connosco pelo Whatsapp</div>
+      
+  </h2>
+
+<div  class="text-primary text-primary--large text-color-white">
+      
+            <div><p>Guarde o número em baixo no seu telemóvel e comece já a fazer&nbsp;as suas marcações e pedidos de informação através do Whatsapp.</p></div>
+      
+  </div>
+
+<div >
+      
+      <div class="section-blue-highlight__button-wrapper">
+              <a class="btn btn-size-big btn-context-secondary" href="https://wa.me/message/OT4DHQXUE2AEJ1" target=""><span>965 965 301</span></a>
+          </div>
+  
+  </div>
+
+  </div>
+
+  </div>
+
+                    </div>
+    </div>
+</div>
+
+      </div>
+          </div>
+  </section>
+                          <section class="section section-news-and-events">
+    <div class="container">
+              <div>
+          <div>
+  
+    
+      
+            <div><h3 class="main-sub-title text-center">Mais para si</h3>
+
+<h2 class="main-title text-center">Não perca as últimas notícias e eventos</h2>
+</div>
+      
+  </div>
+
+        </div>
+                              <div class="buttons-nav tabs">
+                          <button class="tab-link btn--news current" data-tab="tab-1">
+                <span>Notícias</span>
+              </button>
+                                  </div>
+                    <div class="layout layout--2-columns-50-50-layout news-events columns">
+                  <div id="tab-1" class="layout__region layout__region--sidebar_left more-news tab-content current column">
+            <div>
+	
+        	
+	    <div class="text-primary">
+      
+            <div><h3 class="main-sub-title block-title">Notícias</h3></div>
+      
+    </div>
+  </div>
+
+
+<div class="views-element-container">
+  
+    
+      <div><div class="noticias-wrap js-view-dom-id-22f3b0b0ffd3842daac70a7adb4340dee3170c644cb9cb4ee1342499728f6769">
+  
+  
+  
+
+  
+  
+  
+
+  <div class="news-home-wrapper">
+          <div class="views-row"><div data-history-node-id="5834162" class="node node--type-news node--view-mode-teaser-news-list ds-1col clearfix">
+
+  
+
+  
+<div  class="box-news-list card-news-events-wrapper">
+          
+            <div  class="box-news-list-image">
+                    <a href="/noticias/jornadas-pediatria-hospital-lusiadas-lisboa-propoem-visao-4d-adolescencia">  <picture>
+                  <source srcset="/sites/default/files/styles/max_325x325/public/2025-05/Jornadas%20_Pediatria_noticia.png.webp?itok=nd3geibo 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="325" height="204"/>
+              <source srcset="/sites/default/files/styles/max_325x325/public/2025-05/Jornadas%20_Pediatria_noticia.png.webp?itok=nd3geibo 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="325" height="204"/>
+                  <img width="645" height="405" loading="lazy" src="/sites/default/files/styles/max_325x325/public/2025-05/Jornadas%20_Pediatria_noticia.png.webp?itok=nd3geibo" alt="Jornadas de Pediatria do Hospital Lusíadas Lisboa propõem visão 4D da adolescência" />
+
+  </picture>
+</a>
+
+      
+      </div>
+  
+
+
+<div  class="box-news-list-info">
+          
+            <div  class="date">
+                  <time datetime="2025-05-06T12:00:00Z">06 Maio</time>
+
+      
+      </div>
+  
+
+
+<div  class="title">
+          
+                  <h3 class="teaser-news-list-title">
+  <a href="/noticias/jornadas-pediatria-hospital-lusiadas-lisboa-propoem-visao-4d-adolescencia" hreflang="pt-pt">Jornadas de Pediatria do Hospital Lusíadas Lisboa propõem visão 4D da adolescência</a>
+</h3>
+
+      
+  
+
+
+  </div>
+
+<div  class="news-text is-hidden">
+      
+  <div>
+    <div class="visually-hidden">Body</div>
+              <div>A segunda edição das Jornadas de Pediatria do Hospital Lusíadas Lisboa realiza-se a 16 e 17 de maio, no Auditório do Metro do Alto dos Moinhos, em Lisboa, e tem como tema central o “Adolescente 4D”, propondo uma abordagem inovadora que integra corpo, mente, emoção e futuro.</div>
+          </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+
+</div>
+
+</div>
+    <div class="views-row"><div data-history-node-id="5797561" class="node node--type-news node--view-mode-teaser-news-list ds-1col clearfix">
+
+  
+
+  
+<div  class="box-news-list card-news-events-wrapper">
+          
+            <div  class="box-news-list-image">
+                    <a href="/noticias/hospitais-clinicas-lusiadas-saude-retomam-atividade-normal">  <picture>
+                  <source srcset="/sites/default/files/styles/max_325x325/public/2025-04/luz_646x405.jpg.webp?itok=W1pMyZU7 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="325" height="204"/>
+              <source srcset="/sites/default/files/styles/max_325x325/public/2025-04/luz_646x405.jpg.webp?itok=W1pMyZU7 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="325" height="204"/>
+                  <img width="646" height="405" loading="lazy" src="/sites/default/files/styles/max_325x325/public/2025-04/luz_646x405.jpg.webp?itok=W1pMyZU7" alt="Lusíadas retoma atividade normal" />
+
+  </picture>
+</a>
+
+      
+      </div>
+  
+
+
+<div  class="box-news-list-info">
+          
+            <div  class="date">
+                  <time datetime="2025-04-28T12:00:00Z">28 Abril</time>
+
+      
+      </div>
+  
+
+
+<div  class="title">
+          
+                  <h3 class="teaser-news-list-title">
+  <a href="/noticias/hospitais-clinicas-lusiadas-saude-retomam-atividade-normal" hreflang="pt-pt">Hospitais e Clínicas Lusíadas Saúde retomam atividade normal</a>
+</h3>
+
+      
+  
+
+
+  </div>
+
+<div  class="news-text is-hidden">
+      
+  <div>
+    <div class="visually-hidden">Body</div>
+              <div>Se tem um ato clínico marcado a partir de amanhã, terça-feira, dia 29 de abril, saiba que as nossas unidades estarão a funcionar com total segurança e prontas para o receber.</div>
+          </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+
+</div>
+
+</div>
+    <div class="views-row"><div data-history-node-id="5778776" class="node node--type-news node--view-mode-teaser-news-list ds-1col clearfix">
+
+  
+
+  
+<div  class="box-news-list card-news-events-wrapper">
+          
+            <div  class="box-news-list-image">
+                    <a href="/noticias/hospital-lusiadas-monsanto-reforca-resposta-clinica-posiciona-se-como-hospital-cerebro">  <picture>
+                  <source srcset="/sites/default/files/styles/max_325x325/public/2025-04/monsanto_Site.jpg.webp?itok=LyLia9It 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="307" height="325"/>
+              <source srcset="/sites/default/files/styles/max_325x325/public/2025-04/monsanto_Site.jpg.webp?itok=LyLia9It 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="307" height="325"/>
+                  <img width="766" height="810" loading="lazy" src="/sites/default/files/styles/max_325x325/public/2025-04/monsanto_Site.jpg.webp?itok=LyLia9It" alt="Hospital Lusíadas Monsanto reforça resposta clínica e posiciona-se como Hospital do Cérebro" />
+
+  </picture>
+</a>
+
+      
+      </div>
+  
+
+
+<div  class="box-news-list-info">
+          
+            <div  class="date">
+                  <time datetime="2025-04-23T12:00:00Z">23 Abril</time>
+
+      
+      </div>
+  
+
+
+<div  class="title">
+          
+                  <h3 class="teaser-news-list-title">
+  <a href="/noticias/hospital-lusiadas-monsanto-reforca-resposta-clinica-posiciona-se-como-hospital-cerebro" hreflang="pt-pt">Hospital Lusíadas Monsanto reforça resposta clínica e posiciona-se como Hospital do Cérebro</a>
+</h3>
+
+      
+  
+
+
+  </div>
+
+<div  class="news-text is-hidden">
+      
+  <div>
+    <div class="visually-hidden">Body</div>
+              <div>Abordagem inovadora junta saúde mental e doenças neurológicas num modelo integrado de cuidados, que inclui novos programas de reabilitação e um Laboratório do Sono.</div>
+          </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+
+</div>
+
+</div>
+    <div class="views-row"><div data-history-node-id="5730437" class="node node--type-news node--view-mode-teaser-news-list ds-1col clearfix">
+
+  
+
+  
+<div  class="box-news-list card-news-events-wrapper">
+          
+            <div  class="box-news-list-image">
+                    <a href="/noticias/hospital-lusiadas-monsanto-leva-palco-peca-teatro-sobre-alzheimer">  <picture>
+                  <source srcset="/sites/default/files/styles/max_325x325/public/2025-04/noticia_teatro.jpg.webp?itok=aZsmruVT 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="325" height="204"/>
+              <source srcset="/sites/default/files/styles/max_325x325/public/2025-04/noticia_teatro.jpg.webp?itok=aZsmruVT 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="325" height="204"/>
+                  <img width="646" height="405" loading="lazy" src="/sites/default/files/styles/max_325x325/public/2025-04/noticia_teatro.jpg.webp?itok=aZsmruVT" alt="Hospital Lusíadas Monsanto leva a palco peça de teatro sobre Alzheimer" />
+
+  </picture>
+</a>
+
+      
+      </div>
+  
+
+
+<div  class="box-news-list-info">
+          
+            <div  class="date">
+                  <time datetime="2025-04-11T12:00:00Z">11 Abril</time>
+
+      
+      </div>
+  
+
+
+<div  class="title">
+          
+                  <h3 class="teaser-news-list-title">
+  <a href="/noticias/hospital-lusiadas-monsanto-leva-palco-peca-teatro-sobre-alzheimer" hreflang="pt-pt">Hospital Lusíadas Monsanto leva a palco peça de teatro sobre Alzheimer</a>
+</h3>
+
+      
+  
+
+
+  </div>
+
+<div  class="news-text is-hidden">
+      
+  <div>
+    <div class="visually-hidden">Body</div>
+              <div>O Hospital Lusíadas Monsanto, unidade de referência do Grupo Lusíadas Saúde na saúde mental e neurológica, reafirma o seu compromisso de sensibilizar para a importância da saúde do cérebro, para o impacto das doenças neurocognitivas e para a necessidade de combater o estigma associado a estas doenças, ao patrocinar a peça de teatro “O Amor não se esquece, Afonso”, uma produção original que retrata a realidade de quem vive com Doença de Alzheimer.</div>
+          </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+
+</div>
+
+</div>
+
+    </div>
+    
+
+  
+  
+
+  
+  
+</div>
+</div>
+
+  </div>
+<div class="center floating-btn-container">
+  
+    
+            <div class="btn-margin">
+    
+                                                                                                                                                                        <a class="btn center  btn-size-regular btn-context-secondary "
+           href="/noticias"
+                    >
+          Ver Todas
+        </a>
+                                          </div>
+       </div>
+
+          </div>
+                          <div id="tab-2" class="layout__region layout__region--sidebar_right more-events tab-content column">
+            <div>
+	
+        	
+	    <div class="text-primary">
+      
+            <div><h3 class="main-sub-title block-title">Eventos</h3>
+</div>
+      
+    </div>
+  </div>
+
+
+<div class="views-element-container">
+  
+    
+      <div><div class="events-wrap js-view-dom-id-a18df44576592b507fa0c8cc662c1ab203f8defb3ca5d38bd0af07d3fdb87cbf">
+  
+  
+  
+
+  
+  
+  
+
+  <span class="no-events-hp">Sem resultados</span>
+    
+
+  
+  
+
+  
+  
+</div>
+</div>
+
+  </div>
+<div class="floating-btn-container">
+  
+    
+            <div class="btn-margin">
+    
+                                                                                                                                                                        <a class="btn  btn--blue  btn--primary "
+           href="/eventos"
+                    >
+          Ver Todos
+        </a>
+                                          </div>
+       </div>
+
+          </div>
+              </div>
+          </div>
   </section>
 
-  <section id="servicos"><h2>Serviços</h2><p><!-- Conteúdo dos serviços --></p></section>
-  <section id="especialidades"><h2>Especialidades</h2><ul id="lista-especialidades"></ul></section>
-  <section id="dicas"><h2>Dicas de Saúde</h2><p><!-- Conteúdo de dicas --></p></section>
-  <section id="contato">
-    <h2>Fale Conosco</h2>
-    <form>
-      <input type="text" placeholder="Nome" required />
-      <input type="email" placeholder="Email" required />
-      <textarea placeholder="Mensagem" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
+  <section class="section section-newsletter">
+          <div class="container">
+              <div  class="layout__region layout__region--content">
+        <div class="columns">
+  
+    
+      <!-- Add you custom twig html here -->
+<div id="newsletter2-block" class="column newsletter-wrap">
+  <div id="tooltip-newsletter-background" class="tooltip-background visually-hidden">
+    <div id="subscribe-tooltip tooltip-content-default" class="subscribe-tooltip">
+      <div class="subscribe-icon"></div>
+      <p class="newsletter-message">Obrigado por subscrever a nossa newsletter!</p>
+      <button class="btn btn-size-regular btn-context-primary" id="close-tooltip-newsletter-btn">Fechar</button>
+    </div>
+  </div>
+  <p class="main-sub-title"> Newsletter </p>
+  <h2 class="main-title"> Os melhores conselhos de saúde no seu email </h2>
+  <p class="nl-description">Juntámos os nossos especialistas para responder a todas as suas dúvidas.</p>
+  <div class="newsletter-form">
+    <form class="newsletter2-form" novalidate="novalidate" data-drupal-selector="newsletter2-form" action="/" method="post" id="newsletter2-form" accept-charset="UTF-8">
+  <div data-drupal-selector="edit-wrapper" id="edit-wrapper" class="js-form-wrapper form-wrapper"><div class="js-form-item form-item js-form-type-email form-item-newsletter-email js-form-item-newsletter-email form-no-label">
+        <input data-drupal-selector="edit-newsletter-email" type="email" id="edit-newsletter-email" name="newsletter_email" value="" size="60" maxlength="254" placeholder="Insira o seu email" class="form-email required" required="required" aria-required="true" />
+
+        </div>
+<input class="btn btn-context-secondary btn-size-big js-form-submit form-submit button button--primary" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" name="op" value="Subscrever" />
+</div>
+<div class="js-form-item form-item js-form-type-checkbox form-item-newsletter-checkbox js-form-item-newsletter-checkbox">
+        <input data-drupal-selector="edit-newsletter-checkbox" type="checkbox" id="edit-newsletter-checkbox" name="newsletter_checkbox" value="1" class="form-checkbox required" required="required" aria-required="true" />
+
+        <label for="edit-newsletter-checkbox" class="option js-form-required form-required">Aceito os <a href="/termos-e-condicoes"> termos e condições </a></label>
+      </div>
+<input autocomplete="off" data-drupal-selector="form-zfravr2tgakbn8bdmguubxxpjw-b9wxcdwbk7vjkloy" type="hidden" name="form_build_id" value="form-ZfrAVr2tGaKbn8bdmgUUBXxPJW_b9wxcDwbk7vJkLoY" />
+<input data-drupal-selector="edit-newsletter2-form" type="hidden" name="form_id" value="newsletter2_form" />
+
+</form>
+
+    <div id="newsletter-loader"><div></div><div></div><div></div><div></div></div>
+    <p class="form-error email-error visually-hidden" id="email-error">Introduza um e-mail válido</p>
+    <p class="form-error checkbox-error visually-hidden" id="checkbox-error">A aceitação dos termos é obrigatória</p>
+  </div>
+</div>
+
+  </div>
+
+      </div>
+          </div>
   </section>
 
-  <footer><p>© 2025 InfoSaúde Recife</p></footer>
+  </div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="main.js"></script>
-</body>
+</article>
+
+  
+
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1400 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <title>ic_footer_shape</title>
+      <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage" transform="translate(0.000000, -4429.000000)" fill="#002F7B">
+          <path d="M0,4516 L1400,4516 L1400,4429 C934,4503.00209 467.333333,4526.56259 0,4499.68151 L0,4516 Z" id="ic_footer_shape"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-content-top columns custom-adjustment-display-footer-top">
+        <div class="column is-4 has-text-left-tablet has-text-left-desktop footer-logo">
+            <div>
+    <div id="block-imagefooter">
+  
+    
+            <div class="image-block left">
+                  <a href="/homepage-lusiadas" target="">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+              <img width="480" height="480" src="/sites/default/files/2022-05/lg_lusiadas_11_SabemosCuidar_1.svg" alt="Sabemos Cuidar" loading="lazy" />
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+                  </a>
+              </div>
+      </div>
+<div id="block-footerinfolinks" class="floating-btn-container">
+  
+    
+      
+                                                                                                                                                                        <a class="btn     "
+           href="/lusiadas/lusiadas-knowledge-center"
+                    >
+          Lusíadas Knowledge Center
+        </a>
+                        <a class="btn     "
+           href="https://jobpage.cvwarehouse.com/?companyGuid=af1a9847-a9ab-4cd7-904e-d48470afea9a&amp;lang=pt-PT"
+                    >
+          Junte-se a nós
+        </a>
+                                     </div>
+
+  </div>
+
+        </div>
+        <div class="column is-4 has-text-left-tablet has-text-left-desktop footer-contacts">
+          <div class="footer-content-item footer-content-contacts special-mobile-margin lkc-footer-hide">
+            <div class="footer-content-contacts__content">
+              <div class="footer-content-contacts__sub_title">Fale connosco</div>
+              <div class="footer-content-contacts__title"></div>
+              <div class="footer-content-contacts__phone-email-wrapper">
+                <div class="footer-content-contacts__phone">
+                  <a href="tel:"></a>
+                </div>
+                <div class="footer-content-contacts__email">
+                  <a href="mailto:"></a>
+                </div>
+              </div>
+            </div>
+            <div class="pay-calls-custom">Chamada para a rede fixa nacional</div>
+            <div class="footer-content-contacts__list">
+                <div>
+    <div class="views-element-container" id="block-views-block-organizations-contacts-block-organizations-2">
+  
+    
+      <div region="views_block__organizations_contacts_block_organizations_2"><div class="js-view-dom-id-ec5769a65d2af4208c42f92e70438193d2189e13f2aee1f4b1d0ec00abccb8de">
+  
+  
+  
+
+  
+  
+  
+<ul>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Maia</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5698028</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.25614468,-8.65366662</div></div></li>
+                 <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Braga</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.hlbraga@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5169585</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.547433,-8.42243</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Paços de Ferreira</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.pacosferreira@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5169584</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.284459,-8.360726</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Porto</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.hlporto@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5169583</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.15738,-8.625954</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Clínica Lusíadas Almada</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.clalmada@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5155883</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.660081,-9.175387</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Amadora</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.hlamadora@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5155882</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.748693,-9.229635</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Clínica Lusíadas Oriente</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content"></div></div><div class="views-field views-field-nid"><span class="field-content">5155881</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.79424,-9.103562</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Entrecampos</span></div><div class="views-field views-field-field-phone"><div class="field-content">217 812 590</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5011512</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.74389,-9.15391</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Campera</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 770 40 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4738125</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">0,0</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Paços de Ferreira</span></div><div class="views-field views-field-field-phone"><div class="field-content">255 073 400</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4602366</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.284459,-8.360726</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Lisboa</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.altomoinhos@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4435870</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.74965,-9.17951</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Vila Real</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.vilareal@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360807</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.31154,-7.73345</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Cascais Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.cascaisshopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360797</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.73829,-9.39803</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Telheiras</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.telheiras@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360798</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.76533,-9.17423</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Almada</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.almada@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360799</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.68007,-9.15711</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Guimarães Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.guimaraesshopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360800</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.44081,-8.30432</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Norte Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.norteshopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360801</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.18093,-8.65463</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc São João da Madeira</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.sjmadeira@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360802</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">40.89224,-8.49154</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Gaia Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.gaiashopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360803</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.11841,-8.61906</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Campo 24 de Agosto</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.campo24agosto@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360804</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.14904,-8.60019</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Viana do Castelo</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.vianacastelo@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360805</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.70459,-8.81468</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Minho Center</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.minhocenter@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360806</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.5437,-8.40156</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Coimbra</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.coimbrashopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325917</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">40.19443,-8.40909</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Leiria Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.leiriashopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325918</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">39.73272,-8.82474</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Alegro Sintra</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.alegrosintra@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325916</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.7745,-9.33562</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Santo António dos Cavaleiros</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.santoantoniocavaleiros@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325915</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.81863,-9.17465</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Queluz</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.queluzpc@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325914</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.75466,-9.25349</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Colombo</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.colombo@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325913</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.75482,-9.18849</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Amadora</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.amadora@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325912</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">0,0</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Quinta do Marquês</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.quintamarques@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325911</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.69684,-9.32636</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Oeiras Parque</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.oeirasparque@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325910</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.70625,-9.30165</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Avenida de Roma</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.roma@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325909</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.74464,-9.1395</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc 5 de Outubro</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.5outubro@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325908</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.73994,-9.14866</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Monsanto</span></div><div class="views-field views-field-field-phone"><div class="field-content">214 329 410</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">3476674</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.7422,-9.2308</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Santa Maria da Feira</span></div><div class="views-field views-field-field-phone"><div class="field-content">226 085 580</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">2923940</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">40.927189,-8.572576</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Vilamoura</span></div><div class="views-field views-field-field-phone"><div class="field-content">28 989 20 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">2208838</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.08085612,-8.11387725</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Amoreiras</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.amoreiras@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">1624655</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.722792,-9.160851</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Porto</span></div><div class="views-field views-field-field-phone"><div class="field-content">22 605 64 50</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5717</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.15738,-8.625954</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Forum Algarve</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.faro@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5727</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.028698,-7.945645</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Faro</span></div><div class="views-field views-field-field-phone"><div class="field-content">28 989 20 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5726</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.019905,-7.929592</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Albufeira</span></div><div class="views-field views-field-field-phone"><div class="field-content">28 989 20 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5725</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.1032,-8.2335</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Oriente</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 499 93 80</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5724</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.79424,-9.103562</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Amadora</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 499 93 80</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5723</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.748693,-9.229635</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Almada</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 770 40 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5722</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.660081,-9.175387</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Lisboa</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 770 40 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5720</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.748943,-9.176475</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Braga</span></div><div class="views-field views-field-field-phone"><div class="field-content">253 079 579</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5719</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.547433,-8.42243</div></div></li>
+               <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Gaia</span></div><div class="views-field views-field-field-phone"><div class="field-content">22 605 64 50</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5718</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.127049,-8.60574</div></div></li>
+  
+    
+</ul>
+  
+  
+
+  
+  
+</div>
+</div>
+
+  </div>
+
+  </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-4 has-text-centered-mobile has-text-right-tablet has-text-right-desktop footer-social-media footer-cta">
+            <div>
+    <div id="block-footerwhatsapp">
+	
+        	
+	    <div class="text-primary">
+      
+            <div><div class="footer-whatsapp btn btn btn-context-primary btn--blue"><img alt="Fale connosco no Whatsapp" height="20" loading="lazy" src="/themes/custom/lusiadassaude/svg/whatsapp-footer.svg" width="20"><a class="btn-context-primary" href="https://wa.me/message/OT4DHQXUE2AEJ1" target="_blank">Fale connosco no Whatsapp</a></div>
+</div>
+      
+    </div>
+  </div>
+
+
+<nav role="navigation" aria-labelledby="block-footersocialmedia-menu" id="block-footersocialmedia" class="socials-footer-menu">
+      
+  <p id="block-footersocialmedia-menu">Siga-nos também nas redes sociais</p>
+  
+
+        
+
+                <ul region="footersocialmedia" class="menu">
+                        <li class="menu-icon menu-icon-12 menu-item">
+                          <a href="https://www.instagram.com/lusiadas_saude" class="menu-link menu-link-icon"
+                >
+                <img src="/sites/default/files/menu_icons/ic_instagram.svg"/>
+              </a>
+                                  </li>
+                  <li class="menu-icon menu-icon-11 menu-item">
+                          <a href="https://www.youtube.com/user/lusiadassaude" class="menu-link menu-link-icon"
+                >
+                <img src="/sites/default/files/menu_icons/ic_youtube.svg"/>
+              </a>
+                                  </li>
+                  <li class="menu-icon menu-icon-13 menu-item">
+                          <a href="https://www.facebook.com/lusiadas.pt" class="menu-link menu-link-icon"
+                >
+                <img src="/sites/default/files/menu_icons/ic_facebook.svg"/>
+              </a>
+                                  </li>
+                  <li class="menu-icon menu-icon-14 menu-item">
+                          <a href="https://www.linkedin.com/company/lusiadas-saude" class="menu-link menu-link-icon"
+                >
+                <img src="/sites/default/files/menu_icons/ic_linkedin.svg"/>
+              </a>
+                                  </li>
+              </ul>
+      
+
+
+
+  </nav>
+
+  </div>
+
+        </div>
+      </div>
+      <div class="footer-content-middle columns custom-display-footer-middle">
+        <div class="column is-4 has-text-left-tablet has-text-left-desktop footer-financing align-text-footer-middle">
+          <p class="footer-title">Projetos Cofinanciados UE</p>
+            <div>
+    <div id="block-projetosconfinanciadoseu">
+  
+    
+            <div class="image-block left">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2022-02/projectos-confinanciados.png.webp?itok=v1LJ3wPH 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="702" height="105"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2022-02/projectos-confinanciados.png.webp?itok=v1LJ3wPH 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="702" height="105"/>
+                  <img width="702" height="105" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2022-02/projectos-confinanciados.png.webp?itok=v1LJ3wPH" alt="Projectos Confinanciados UE" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+              </div>
+      </div>
+
+  </div>
+
+        </div>
+        <div class="column is-5 has-text-left-tablet has-text-left-desktop footer-certifications align-text-footer-middle">
+          <p class="footer-title">Certificações</p>
+            <div>
+    <div id="block-imagequality">
+  
+    
+            <div class="image-block center">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2020-07/img_quality.png.webp?itok=NMee8Ny4 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="38" height="38"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2020-07/img_quality.png.webp?itok=NMee8Ny4 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="38" height="38"/>
+                  <img width="38" height="38" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2020-07/img_quality.png.webp?itok=NMee8Ny4" alt="quality" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+              </div>
+      </div>
+<div id="block-imagesgs">
+  
+    
+            <div class="image-block center">
+                  <a href="/qualidade" target="">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2020-09/Himms_Analitics_branco-40x178.png.webp?itok=7WcA6Orj 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="178" height="40"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2020-09/Himms_Analitics_branco-40x178.png.webp?itok=7WcA6Orj 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="178" height="40"/>
+                  <img width="178" height="40" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2020-09/Himms_Analitics_branco-40x178.png.webp?itok=7WcA6Orj" alt="HIMSS Analytics" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+                  </a>
+              </div>
+      </div>
+
+  </div>
+
+        </div>
+        <div class="column is-3 has-text-left-tablet has-text-left-desktop footer-awards align-text-footer-middle">
+          <p class="footer-title">Distinções</p>
+            <div>
+    <div id="block-escolhadoconsumidor2022">
+  
+    
+            <div class="image-block left">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2022-02/escolha_consumidor.png.webp?itok=18G8NfPQ 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="100" height="153"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2022-02/escolha_consumidor.png.webp?itok=18G8NfPQ 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="100" height="153"/>
+                  <img width="100" height="153" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2022-02/escolha_consumidor.png.webp?itok=18G8NfPQ" alt="Escolha do Consumidor" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+              </div>
+      </div>
+<div id="block-premiocincoestrelas2021">
+  
+    
+            <div class="image-block left">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2022-02/cinco_estrelas.png.webp?itok=08rpkTXN 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="160" height="150"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2022-02/cinco_estrelas.png.webp?itok=08rpkTXN 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="160" height="150"/>
+                  <img width="160" height="150" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2022-02/cinco_estrelas.png.webp?itok=08rpkTXN" alt="Prémio Cinco Estrelas 2021" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+              </div>
+      </div>
+<div id="block-portugalsuperbrands2021">
+  
+    
+            <div class="image-block left">
+                    
+            <div><div class="media media--type-image media--view-mode-default ds-1col clearfix">
+
+  
+
+      
+                <picture>
+                  <source srcset="/sites/default/files/styles/convert_to_webp/public/2023-08/Selo_Superbrands_2022_GLOW%20%281%29.png.webp?itok=gUUcUdFv 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="1418" height="1418"/>
+              <source srcset="/sites/default/files/styles/convert_to_webp/public/2023-08/Selo_Superbrands_2022_GLOW%20%281%29.png.webp?itok=gUUcUdFv 1x" media="all and (min-width: 560px) and (max-width: 850px)" type="image/webp" width="1418" height="1418"/>
+                  <img width="1418" height="1418" loading="lazy" src="/sites/default/files/styles/convert_to_webp/public/2023-08/Selo_Superbrands_2022_GLOW%20%281%29.png.webp?itok=gUUcUdFv" alt="Selo Superbrands 2022" />
+
+  </picture>
+
+
+      
+  
+
+
+
+</div>
+
+</div>
+      
+
+              </div>
+      </div>
+
+  </div>
+
+        </div>
+      </div>
+      <div class="footer-content-bottom-links  columns">
+        <div class="column is-12 has-text-left-tablet has-text-left-desktop footer-menu-links">
+            <div>
+    <nav role="navigation" aria-labelledby="block-footertermsandconditions-menu" id="block-footertermsandconditions">
+            
+  <p class="visually-hidden" id="block-footertermsandconditions-menu">Footer Terms and Conditions</p>
+  
+
+        
+
+                <ul region="footertermsandconditions" class="menu">
+                        <li class="menu-icon menu-icon-16 menu-item">
+            <a href="/termos-condicoes" class="menu-link" data-drupal-link-system-path="node/2135">Termos e Condições</a>
+                      </li>
+                  <li class="menu-icon menu-icon-15 menu-item">
+            <a href="/politica-privacidade" class="menu-link" data-drupal-link-system-path="node/4928">Política de Privacidade</a>
+                      </li>
+                  <li class="menu-icon menu-icon-17 menu-item">
+            <a href="/politicas-cookies" class="menu-link" data-drupal-link-system-path="node/4929">Política de Cookies</a>
+                      </li>
+                  <li class="menu-icon menu-icon-699 menu-item">
+            <a href="/sites/default/files/2024-05/Politica_de_Protecao_de_Dados.pdf" target="_blank" class="menu-link">Proteção de Dados</a>
+                      </li>
+                  <li class="menu-icon menu-icon-751 menu-item">
+            <a href="/intermediacao-credito" class="menu-link" data-drupal-link-system-path="node/1547173">Intermediação de Crédito</a>
+                      </li>
+              </ul>
+      
+
+
+
+  </nav>
+
+  </div>
+
+        </div>
+      </div>
+      <div class="footer-content-bottom">
+        <div class="columns custom-position-adjustment">
+          <div class="column is-4 has-text-centered-mobile has-text-left-tablet has-text-left-desktop footer-terms footer-copyright">
+              <div>
+    <div id="block-copyright" class="footer-bottom-copyright">
+	
+        	
+	    <div class="text-primary">
+      
+            <div><p>© 2025 Lusíadas.</p></div>
+      
+    </div>
+  </div>
+
+
+
+  </div>
+
+          </div>
+          <div class="column is-8 has-text-centered-mobile has-text-right-tablet has-text-right-desktop footer-terms footer-cookies-complaints">
+              <div>
+    <div id="block-livroreclamacoes">
+	
+        	
+	    <div class="text-primary">
+      
+            <div><div><a href="https://www.livroreclamacoes.pt/inicio" target="_blank"><img alt="livro reclamações" data-entity-type="file" data-entity-uuid="ac1f156b-3c42-456d-bd55-01a87c5cede0" src="/sites/default/files/inline-images/livro_reclamacoes-500x-207-w%202.png" width="104" height="43"></a></div>
+</div>
+      
+    </div>
+  </div>
+
+
+
+  </div>
+
+            <div id="consent_blackbar"></div>
+            <div id="teconsent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <div class="floating-contacts">
+    <button class="btn-floating-cta">Floating Contact Button</button>
+    <div class="floating-contacts__content">
+      <button class="close"><img src="/themes/custom/lusiadassaude/svg/ic_close.svg" alt="close icon"></button>
+      <div class="floating-contacts__title">
+      </div>
+      <div class="floating-contacts__phone-email-wrapper">
+        <div class="floating-contacts__phone">
+          <a href="tel:"></a>
+        </div>
+        <div class="floating-contacts__email">
+          <a href="mailto:"></a>
+        </div>
+      </div>
+       <div class="pay-calls-footer-c">Chamada para a rede fixa nacional</div>
+    </div>
+    <div class="floating-contacts__list">
+      <div class="header-floating-list is-hidden-tablet">
+        <span>Hospital</span>
+        <button class="close"><img src="/themes/custom/lusiadassaude/svg/ic_close_blue.svg" alt="close icon"></button>
+      </div>
+        <div>
+    <div class="views-element-container" id="block-views-block-organizations-contacts-float">
+  
+    
+      <div region="views_block__organizations_contacts_float"><div class="js-view-dom-id-addde6d04f8173b5225dcbd5cb98bbc77d98843f3c96eabf1258039756f2fd2d">
+  
+  
+  
+
+  
+  
+  
+
+  
+<ul>
+            <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Maia</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5698028</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.25614468,-8.65366662</div></div></li>
+                <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Braga</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.hlbraga@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5169585</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.547433,-8.42243</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Paços de Ferreira</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.pacosferreira@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5169584</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.284459,-8.360726</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Porto</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.hlporto@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5169583</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.15738,-8.625954</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Clínica Lusíadas Almada</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.clalmada@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5155883</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.660081,-9.175387</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Amadora</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.hlamadora@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5155882</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.748693,-9.229635</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Clínica Lusíadas Oriente</span></div><div class="views-field views-field-field-phone"><div class="field-content"></div></div><div class="views-field views-field-field-email"><div class="field-content"></div></div><div class="views-field views-field-nid"><span class="field-content">5155881</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.79424,-9.103562</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Entrecampos</span></div><div class="views-field views-field-field-phone"><div class="field-content">217 812 590</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5011512</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.74389,-9.15391</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Campera</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 770 40 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4738125</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">0,0</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Paços de Ferreira</span></div><div class="views-field views-field-field-phone"><div class="field-content">255 073 400</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4602366</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.284459,-8.360726</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Hospital Lusíadas Lisboa</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.altomoinhos@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4435870</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.74965,-9.17951</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Vila Real</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.vilareal@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360807</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.31154,-7.73345</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Cascais Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.cascaisshopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360797</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.73829,-9.39803</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Telheiras</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.telheiras@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360798</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.76533,-9.17423</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Almada</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.almada@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360799</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.68007,-9.15711</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Guimarães Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.guimaraesshopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360800</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.44081,-8.30432</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Norte Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.norteshopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360801</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.18093,-8.65463</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc São João da Madeira</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.sjmadeira@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360802</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">40.89224,-8.49154</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Gaia Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.gaiashopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360803</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.11841,-8.61906</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Campo 24 de Agosto</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.campo24agosto@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360804</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.14904,-8.60019</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Viana do Castelo</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.vianacastelo@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360805</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.70459,-8.81468</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Minho Center</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.minhocenter@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4360806</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.5437,-8.40156</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Coimbra</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.coimbrashopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325917</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">40.19443,-8.40909</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Leiria Shopping</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.leiriashopping@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325918</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">39.73272,-8.82474</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Alegro Sintra</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.alegrosintra@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325916</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.7745,-9.33562</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Santo António dos Cavaleiros</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.santoantoniocavaleiros@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325915</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.81863,-9.17465</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Queluz</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.queluzpc@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325914</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.75466,-9.25349</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Colombo</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.colombo@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325913</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.75482,-9.18849</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Amadora</span></div><div class="views-field views-field-field-phone"><div class="field-content">211547471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.amadora@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325912</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">0,0</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Quinta do Marquês</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.quintamarques@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325911</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.69684,-9.32636</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Oeiras Parque</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.oeirasparque@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325910</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.70625,-9.30165</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Avenida de Roma</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.roma@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325909</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.74464,-9.1395</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc 5 de Outubro</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.5outubro@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">4325908</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.73994,-9.14866</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Monsanto</span></div><div class="views-field views-field-field-phone"><div class="field-content">214 329 410</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">3476674</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.7422,-9.2308</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Santa Maria da Feira</span></div><div class="views-field views-field-field-phone"><div class="field-content">226 085 580</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">2923940</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">40.927189,-8.572576</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Vilamoura</span></div><div class="views-field views-field-field-phone"><div class="field-content">28 989 20 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">2208838</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.08085612,-8.11387725</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Amoreiras</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.amoreiras@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">1624655</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.722792,-9.160851</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Porto</span></div><div class="views-field views-field-field-phone"><div class="field-content">22 605 64 50</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5717</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.15738,-8.625954</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica HeyDoc Forum Algarve</span></div><div class="views-field views-field-field-phone"><div class="field-content">211 547 471</div></div><div class="views-field views-field-field-email"><div class="field-content">clinica.faro@heydoc.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5727</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.028698,-7.945645</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Faro</span></div><div class="views-field views-field-field-phone"><div class="field-content">28 989 20 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5726</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.019905,-7.929592</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Albufeira</span></div><div class="views-field views-field-field-phone"><div class="field-content">28 989 20 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5725</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">37.1032,-8.2335</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Oriente</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 499 93 80</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5724</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.79424,-9.103562</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Amadora</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 499 93 80</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5723</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.748693,-9.229635</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Almada</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 770 40 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5722</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.660081,-9.175387</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Lisboa</span></div><div class="views-field views-field-field-phone"><div class="field-content">21 770 40 40</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5720</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">38.748943,-9.176475</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Hospital Lusíadas Braga</span></div><div class="views-field views-field-field-phone"><div class="field-content">253 079 579</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5719</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.547433,-8.42243</div></div></li>
+              <li class="views-row"><div class="views-field views-field-title"><span class="field-content">Clínica Lusíadas Gaia</span></div><div class="views-field views-field-field-phone"><div class="field-content">22 605 64 50</div></div><div class="views-field views-field-field-email"><div class="field-content">geral@lusiadas.pt</div></div><div class="views-field views-field-nid"><span class="field-content">5718</span></div><div class="views-field views-field-field-geolocation"><div class="field-content">41.127049,-8.60574</div></div></li>
+  </ul>
+
+    
+
+  
+  
+
+  
+  
+</div>
+</div>
+
+  </div>
+
+  </div>
+
+    </div>
+  </div>
+
+
+</div>
+  </div>
+
+      
+      <script src="/sites/default/files/js/js_Hu0zkQ_QMkHo691k_enEB1xbiaKj1aCFPh2MSa7BqGU.js?scope=footer&amp;delta=0&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxdjl0OwjAMgy9U1iNNpgmhKGumJpXY7fnRpgleLPuzHwyiMLQtYzfTrVuLVKxzpj5W6IQRVmxZlYOTmInyHJAsb_nPEx54_sIl6fAKgjsGcRa1K_TisWlt8i3p087O6OWej_WekweietTix6GTvADjn0rb"></script>
+<script src="/sites/default/files/js/js_a1yvkcG5LaCanZwEoCvwIz1xbVZTj9BANNuPzdFZjfs.js?scope=footer&amp;delta=1&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxdjl0OwjAMgy9U1iNNpgmhKGumJpXY7fnRpgleLPuzHwyiMLQtYzfTrVuLVKxzpj5W6IQRVmxZlYOTmInyHJAsb_nPEx54_sIl6fAKgjsGcRa1K_TisWlt8i3p087O6OWej_WekweietTix6GTvADjn0rb"></script>
+<script src="https://static.addtoany.com/menu/page.js" async></script>
+<script src="/sites/default/files/js/js_OXpeSIKMO-X53vx5r-8ctqBQltqO97O-9c28evbtkT0.js?scope=footer&amp;delta=3&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxdjl0OwjAMgy9U1iNNpgmhKGumJpXY7fnRpgleLPuzHwyiMLQtYzfTrVuLVKxzpj5W6IQRVmxZlYOTmInyHJAsb_nPEx54_sIl6fAKgjsGcRa1K_TisWlt8i3p087O6OWej_WekweietTix6GTvADjn0rb"></script>
+<script src="/sites/default/files/js/js_wMjxr0SDPiPQ8XuVbjUCYlzaf6MiJ9oHmMpoX_ScW-Y.js?scope=footer&amp;delta=4&amp;language=pt-pt&amp;theme=lusiadassaude&amp;include=eJxdjl0OwjAMgy9U1iNNpgmhKGumJpXY7fnRpgleLPuzHwyiMLQtYzfTrVuLVKxzpj5W6IQRVmxZlYOTmInyHJAsb_nPEx54_sIl6fAKgjsGcRa1K_TisWlt8i3p087O6OWej_WekweietTix6GTvADjn0rb"></script>
+
+  </body>
 </html>
+
 
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
