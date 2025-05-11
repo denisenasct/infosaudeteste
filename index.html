@@ -1,32 +1,57 @@
-<!DOCTYPE html>
+import os
+
+# Estrutura completa com mapa, imagens e API
+base_dir = "/mnt/data/infosaude_completo_map"
+os.makedirs(f"{base_dir}/assets/css", exist_ok=True)
+os.makedirs(f"{base_dir}/assets/js", exist_ok=True)
+os.makedirs(f"{base_dir}/assets/img", exist_ok=True)
+
+# Página principal com mapa interativo e filtro
+html = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Início - InfoSaúde Recife</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>InfoSaúde Recife</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
   <header>
-    <div class="logo">InfoSaúde Recife</div>
+    <h1>InfoSaúde Recife</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="especialidades.html">Especialidades</a></li>
-        <li><a href="unidades.html">Unidades</a></li>
-        <li><a href="agendamento.html">Agendamento</a></li>
-        <li><a href="contato.html">Contato</a></li>
+        <li><a href="#">Início</a></li>
+        <li><a href="#mapa">Postos de Saúde</a></li>
+        <li><a href="#distritos">Distritos Sanitários</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h1>Início</h1>
-    <div id="conteudo"><!-- Conteúdo específico desta página --></div>
+    <section>
+      <h2>Busca por Endereço ou CEP</h2>
+      <input type="text" id="endereco" placeholder="Digite seu endereço ou CEP" />
+      <button onclick="buscarEndereco()">Buscar</button>
+    </section>
+
+    <section id="mapa">
+      <h2>Mapa Interativo dos Postos</h2>
+      <div id="mapa-container"></div>
+    </section>
+
+    <section id="distritos">
+      <h2>Lista de Postos por Distrito</h2>
+      <div id="lista-postos"></div>
+    </section>
   </main>
 
-  <footer><p>© 2025 InfoSaúde Recife</p></footer>
+  <footer>
+    <p>© 2025 InfoSaúde Recife</p>
+  </footer>
 
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+"""
